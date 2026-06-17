@@ -1,4 +1,10 @@
+import { useState } from "react"
+
+import { Card } from "../components/Card";
+
 export default function ClientPage() {
+  const [availableAdoptions, setAvailableAdoptions] = useState([]);
+
   return (
     <div className="w-full">
       {/* Hero */}
@@ -31,6 +37,18 @@ export default function ClientPage() {
         </div>
       </main>
       {/* Hero */}
-    </div>
+
+      {/* Adoptions section */}
+      <section className="px-4 py-25">
+        <h1 className="text-center text-primary text-md font-semibold">CONHEÇA NOSSOS AMIGOS</h1>
+        <p className="text-center text-accent-foreground text-4xl font-bold">Pets em adoção</p>
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 py-10 lg:px-10 xl:px-15"
+        >
+          <Card name='pet' age={0} imageUrl='' />
+        </div>
+      </section >
+      {/* Adoptions section */}
+    </div >
   )
 }
