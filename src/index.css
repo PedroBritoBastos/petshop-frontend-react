@@ -1,1 +1,69 @@
 @import "tailwindcss";
+
+:root {
+  /* Colors - Green Pet Shop Theme */
+  --color-primary: #22c55e;
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #16a34a;
+  --color-secondary-foreground: #ffffff;
+
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+
+  --color-muted: #f0fdf4;
+  --color-muted-foreground: #166534;
+
+  --color-accent: #86efac;
+  --color-accent-foreground: #14532d;
+
+  --color-border: #bbf7d0;
+  --color-input: #dcfce7;
+  --color-ring: #22c55e;
+
+  --color-background: #ffffff;
+  --color-foreground: #14532d;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #166534;
+
+  /* Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+}
+
+@theme {
+  /* Colors - Green Pet Shop Theme */
+  --color-primary: #22c55e;
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #16a34a;
+  --color-secondary-foreground: #ffffff;
+
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+
+  --color-muted: #f0fdf4;
+  --color-muted-foreground: #166534;
+
+  --color-accent: #86efac;
+  --color-accent-foreground: #14532d;
+
+  --color-border: #bbf7d0;
+  --color-input: #dcfce7;
+  --color-ring: #22c55e;
+
+  --color-background: #ffffff;
+  --color-foreground: #14532d;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #166534;
+
+  /* Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+}
