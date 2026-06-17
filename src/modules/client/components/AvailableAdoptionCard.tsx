@@ -4,10 +4,9 @@ type Props = {
   imageUrl: string;
 }
 
-export function Card({
+export function AvailableAdoptionCard({
   name = 'Pet',
   age = 0,
-  imageUrl = ''
 }: Props) {
   return (
     <div
@@ -15,7 +14,7 @@ export function Card({
     >
       {/* Imagem do pet */}
       <div className="h-[300px] border-b-1 border-accent">
-        <img src={imageUrl} alt="name" className="w-full h-full" />
+        <img src={undefined} alt="name" className="w-full h-full" />
       </div>
       {/* Imagem do pet */}
 
