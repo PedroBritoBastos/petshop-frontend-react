@@ -1,5 +1,6 @@
 import { useState } from "react"
 
+import { Navbar } from "../../../components/Navbar";
 import { AvailableAdoptionCard } from "../components/AvailableAdoptionCard";
 import { PetshopServiceCard } from "../components/PetshopServiceCard";
 
@@ -8,6 +9,8 @@ export default function ClientPage() {
 
   return (
     <div className="w-full">
+      <Navbar />
+
       {/* Hero */}
       <main className="bg-muted flex flex-col md:flex-row md:p-10">
         <div className="md:flex-1 p-15 md:p-10 md:py-30">
