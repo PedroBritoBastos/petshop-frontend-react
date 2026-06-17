@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Card } from "../components/Card";
 
 export default function ClientPage() {
-  const [availableAdoptions, setAvailableAdoptions] = useState([]);
+  const [availableAdoptions] = useState([{ name: 'Boris', age: 3, imageUrl: '' }]);
 
   return (
     <div className="w-full">
@@ -45,7 +45,13 @@ export default function ClientPage() {
         <div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 py-10 lg:px-10 xl:px-15"
         >
-          <Card name='pet' age={0} imageUrl='' />
+          {availableAdoptions.map((availableAdoption) => (
+            <Card
+              name={availableAdoption.name}
+              age={availableAdoption.age}
+              imageUrl={availableAdoption.imageUrl}
+            />
+          ))}
         </div>
       </section >
       {/* Adoptions section */}
