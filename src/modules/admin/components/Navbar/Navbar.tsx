@@ -1,11 +1,11 @@
 import { NavbarOption } from "./NavbarOption"
-import { useState } from "react"
+import { useViewModeContext } from "../../hooks/useViewModeContext";
 
 export function Navbar() {
-  const [activeOption, setActiveOption] = useState<string>('Painel')
+  const { activeOption, changeActiveOption } = useViewModeContext();
 
   function handleNavbarOptionClick(optionName: string): void {
-    setActiveOption(optionName);
+    changeActiveOption(optionName);
   }
 
   return (
