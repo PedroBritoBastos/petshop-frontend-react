@@ -1,3 +1,5 @@
+import { RegisterForm } from "../components/RegisterForm"
+
 export default function RegisterPage() {
   return (
     <div className="w-full h-screen flex gap-5 bg-primary-foreground overflow-hidden">
@@ -8,7 +10,7 @@ export default function RegisterPage() {
         <div className="absolute inset-0 bg-ring/40"></div>
       </div>
 
-      {/* TO DO - IMPLEMENTAR FORMULARIO DE REGISTRO */}
+      <RegisterForm />
     </div>
 
   )

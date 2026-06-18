@@ -1,3 +1,5 @@
+import { LoginForm } from "../components/LoginForm"
+
 export default function LoginPage() {
   return (
     <div className="flex items-center md:items-start w-full h-screen">
@@ -7,7 +9,8 @@ export default function LoginPage() {
       >
         <div className="absolute inset-0 bg-ring/40"></div>
       </div>
-    </div>
 
+      <LoginForm />
+    </div>
   )
 }
