@@ -1,12 +1,20 @@
-import { ViewModeContextProvider } from "../contexts/ViewModeContext"
 import { Navbar } from "../components/Navbar/Navbar"
+import { Dashboard } from "../components/Dashboard/Dashboard";
+
+import { useViewModeContext } from "../hooks/useViewModeContext"
 
 export default function AdminPage() {
+  const { activeOption } = useViewModeContext();
+
   return (
-    <ViewModeContextProvider>
-      <div className="flex flex-col md:flex-row">
-        <Navbar />
-      </div>
-    </ViewModeContextProvider>
+    <div className="flex flex-col md:flex-row">
+      <Navbar />
+
+      {/* Modo painel */}
+      {activeOption === 'Painel' && (
+        <Dashboard />
+      )}
+      {/* Modo painel */}
+    </div>
   )
 }

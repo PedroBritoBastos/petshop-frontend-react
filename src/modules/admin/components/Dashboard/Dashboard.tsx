@@ -3,6 +3,8 @@ import { DashboardCard } from "./DashboardCard"
 export function Dashboard() {
   return (
     <div className="w-full flex flex-col p-5 md:p-10 bg-primary/10 gap-5">
+
+      {/* dashboard */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 w-full gap-5">
         <DashboardCard value={0} title={'Clientes'}>
           <svg
@@ -85,6 +87,9 @@ export function Dashboard() {
           </svg>
         </DashboardCard>
       </div>
+      {/* dashboard */}
+
+
     </div>
   )
 }
