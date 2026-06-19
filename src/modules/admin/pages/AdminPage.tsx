@@ -1,5 +1,6 @@
 import { Navbar } from "../components/Navbar/Navbar"
 import { Dashboard } from "../components/Dashboard/Dashboard";
+import { PetsView } from "../components/PetsView/PetsView";
 
 import { useViewModeContext } from "../hooks/useViewModeContext"
 
@@ -15,6 +16,12 @@ export default function AdminPage() {
         <Dashboard />
       )}
       {/* Modo painel */}
+
+      {/* Modo pets */}
+      {activeOption === 'Pets' && (
+        <PetsView />
+      )}
+      {/* Modo pets */}
 
 
     </div>
