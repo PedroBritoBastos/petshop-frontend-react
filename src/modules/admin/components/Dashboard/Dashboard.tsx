@@ -1,4 +1,6 @@
 import { DashboardCard } from "./DashboardCard"
+import { AdoptionsTable } from "./AdoptionsTable"
+import { SchedulingTable } from "./SchedulingTable"
 
 export function Dashboard() {
   return (
@@ -89,7 +91,12 @@ export function Dashboard() {
       </div>
       {/* dashboard */}
 
-
+      {/* Tabelas */}
+      <div className="flex flex-col md:flex-row gap-5 flex-1">
+        <AdoptionsTable />
+        <SchedulingTable />
+      </div>
+      {/* Tabelas */}
     </div>
   )
 }

@@ -15,6 +15,8 @@ export default function AdminPage() {
         <Dashboard />
       )}
       {/* Modo painel */}
+
+
     </div>
   )
 }
