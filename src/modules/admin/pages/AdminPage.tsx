@@ -1,6 +1,8 @@
 import { Navbar } from "../components/Navbar/Navbar"
 import { Dashboard } from "../components/Dashboard/Dashboard";
 import { PetsView } from "../components/PetsView/PetsView";
+import { ClientsView } from "../components/ClientsView/ClientsView";
+import { ServicesView } from "../components/ServicesView/ServicesView";
 
 import { useViewModeContext } from "../hooks/useViewModeContext"
 
@@ -23,6 +25,17 @@ export default function AdminPage() {
       )}
       {/* Modo pets */}
 
+      {/* Modo clients */}
+      {activeOption === 'Clientes' && (
+        <ClientsView />
+      )}
+      {/* Modo clients */}
+
+      {/* Modo serviços */}
+      {activeOption === 'Serviços' && (
+        <ServicesView />
+      )}
+      {/* Modo serviços */}
 
     </div>
   )
