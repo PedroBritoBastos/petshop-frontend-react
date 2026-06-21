@@ -9,7 +9,7 @@ export const ViewModeContext = createContext<ViewModeContextProps>({} as ViewMod
 
 export function ViewModeContextProvider({ children }: { children: React.ReactNode }) {
 
-  const [activeOption, setActiveOption] = useState<string>('Clients');
+  const [activeOption, setActiveOption] = useState<string>('Painel');
 
   function changeActiveOption(optionName: string): void {
     setActiveOption(optionName);
