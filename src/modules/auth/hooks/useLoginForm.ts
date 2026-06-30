@@ -6,7 +6,7 @@ export function useLoginForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  //const [error, setError] = useState("");
 
   function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value);
@@ -22,12 +22,13 @@ export function useLoginForm() {
 
     const data = { email, password };
     const response = await loginClient(data);
+    console.log(response);
   }
 
   return {
     handleEmailChange,
     handlePasswordChange,
     handleSubmit,
-    error,
+    // error,
   };
 }
