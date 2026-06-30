@@ -1,15 +1,17 @@
+import type { LoginFormData } from "../../modules/auth/types/LoginFormData";
+
 const API = import.meta.env.VITE_API_URL;
 
-export async function login(formData: FormData) {
+export async function login(loginFormData: LoginFormData) {
   const response = await fetch(`${API}/auth/login`, {
     method: "POST",
     credentials: "include",
-    body: formData,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(loginFormData),
   });
 
-  if (!response.ok) {
-    throw new Error("Falha ao realizar login.");
-  }
-
-  return response.json();
+  const data = await response.json();
+  return data;
 }
