@@ -1,13 +1,11 @@
-import { useClientPage } from "../hooks/clientPage/useClientPage";
+//import { useClientPage } from "../hooks/clientPage/useClientPage";
 
 import { Navbar } from "../../../components/Navbar";
-import { AvailableAdoptionCard } from "../components/AvailableAdoptionCard";
+//import { AvailableAdoptionCard } from "../components/AvailableAdoptionCard";
 import { PetshopServiceCard } from "../components/PetshopServiceCard";
 
-import { getAvailablePets } from "../../../services/pet/petService";
-
 export default function ClientPage() {
-  const { availablePets } = useClientPage();
+  //const { availablePets } = useClientPage();
 
   return (
     <div className="w-full">
@@ -51,14 +49,14 @@ export default function ClientPage() {
         <div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 py-10 lg:px-10 xl:px-15"
         >
-          {availablePets.map((availablePet: any) => (
+          {/*           {availablePets.map((availablePet: any) => (
             <AvailableAdoptionCard
               key={availablePet.petId}
               name={availablePet.name}
               age={availablePet.age}
               imageUrl={availablePet.imageUrl}
             />
-          ))}
+          ))} */}
         </div>
       </section >
       {/* Adoptions section */}
