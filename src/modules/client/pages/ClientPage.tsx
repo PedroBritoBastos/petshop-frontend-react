@@ -1,11 +1,21 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import { Navbar } from "../../../components/Navbar";
 import { AvailableAdoptionCard } from "../components/AvailableAdoptionCard";
 import { PetshopServiceCard } from "../components/PetshopServiceCard";
 
+import { getAvailablePets } from "../../../services/pet/petService";
+
 export default function ClientPage() {
   const [availableAdoptions] = useState([{ name: 'Boris', age: 3, imageUrl: '', petId: '' }]);
+
+  useEffect(() => {
+    async function getAvailablePetsResponse() {
+      const response = await getAvailablePets();
+      console.log(response);
+    }
+    getAvailablePetsResponse();
+  }, []);
 
   return (
     <div className="w-full">
