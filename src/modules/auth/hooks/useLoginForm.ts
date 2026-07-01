@@ -18,6 +18,7 @@ export function useLoginForm() {
 
   async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
+    e.stopPropagation();
     if (!email || !password) return;
 
     const data = { email, password };
