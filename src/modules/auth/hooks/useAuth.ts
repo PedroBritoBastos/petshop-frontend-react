@@ -15,7 +15,9 @@ export function useAuth() {
       authContext.login();
       return response;
     } catch (error) {
-      console.log("Ocorreu um erro:" + error);
+      if (error instanceof Error) {
+        alert(error.message);
+      }
     }
   }
 

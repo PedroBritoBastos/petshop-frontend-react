@@ -15,8 +15,8 @@ export async function login(loginFormData: LoginFormData) {
 
   // lança erro caso tenha
   if (!response.ok) {
-    const data = await response.json();
-    throw new Error(data);
+    const error = await response.json();
+    throw new Error(error.message);
   }
 
   // retorna os dados
