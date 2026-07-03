@@ -44,10 +44,7 @@ export function useRegisterForm() {
     if (password !== confirmPassword) return;
 
     const registerFormData = { name, email, password, phone, cpf };
-    const response = await registerClient(registerFormData);
-    console.log(response);
-
-    navigate("/client");
+    await registerClient(registerFormData);
   }
 
   return {

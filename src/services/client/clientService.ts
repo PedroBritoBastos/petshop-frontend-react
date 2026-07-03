@@ -14,9 +14,13 @@ export async function register(registerFormData: RegisterFormData) {
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(error.errors.map((e: { msg: string }) => e.msg).join("\n"));
+
+    if (error.errors) {
+      throw new Error(error.errors.map((e: { msg: string }) => e.msg).join("\n"));
+    }
+
+    throw new Error(error.message);
   }
 
-  // retorna a resposta
-  return await response.json();
+  console.log(await response.json());
 }
