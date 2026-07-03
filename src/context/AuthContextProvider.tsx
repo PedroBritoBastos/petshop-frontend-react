@@ -1,12 +1,5 @@
-import { createContext, useState } from "react";
-
-type AuthContextProps = {
-  isLogged: boolean;
-  login: () => void;
-  logout: () => void;
-}
-
-export const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
+import { useState } from "react";
+import { AuthContext } from "./AuthContext";
 
 export function AuthContextProvider({ children }: { children: React.ReactNode }) {
   const [isLogged, setIsLogged] = useState<boolean>(false);

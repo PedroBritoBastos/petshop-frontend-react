@@ -1,10 +1,8 @@
 import { useClientService } from "../clientService/useClientService";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export function useRegisterForm() {
   const { registerClient } = useClientService();
-  const navigate = useNavigate();
 
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
