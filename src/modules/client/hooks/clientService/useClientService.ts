@@ -3,8 +3,13 @@ import { register } from "../../../../services/client/clientService";
 
 export function useClientService() {
   async function registerClient(registerFormData: RegisterFormData) {
-    const data = await register(registerFormData);
-    return data;
+    try {
+      return await register(registerFormData);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    }
   }
 
   return { registerClient };

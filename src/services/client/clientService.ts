@@ -2,7 +2,7 @@ import type { RegisterFormData } from "../../modules/client/types/RegisterFormDa
 const API = import.meta.env.VITE_API_URL;
 
 export async function register(registerFormData: RegisterFormData) {
-  // send data
+  // envia dados para a api
   const response = await fetch(`${API}/clients`, {
     method: "POST",
     credentials: "include",
@@ -12,7 +12,11 @@ export async function register(registerFormData: RegisterFormData) {
     body: JSON.stringify(registerFormData),
   });
 
-  // receiving api response
-  const data = await response.json();
-  return data;
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.errors.map((e: { msg: string }) => e.msg).join("\n"));
+  }
+
+  // retorna a resposta
+  return await response.json();
 }

@@ -20,6 +20,5 @@ export async function login(loginFormData: LoginFormData) {
   }
 
   // retorna os dados
-  const data = await response.json();
-  return data;
+  return await response.json();
 }
