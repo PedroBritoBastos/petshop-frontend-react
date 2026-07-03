@@ -1,8 +1,10 @@
 import { useClientService } from "../clientService/useClientService";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function useRegisterForm() {
   const { registerClient } = useClientService();
+  const navigate = useNavigate();
 
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -45,8 +47,12 @@ export function useRegisterForm() {
     const data = await registerClient(registerFormData);
 
     if (data.errors) {
+      console.log(data.errors);
       alert(data.errors[0].msg);
+      return;
     }
+
+    navigate("/client");
   }
 
   return {
