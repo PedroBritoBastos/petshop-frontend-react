@@ -19,15 +19,15 @@ export function useLoginForm() {
   async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     e.stopPropagation();
+
     if (!email || !password) return;
 
-    const data = { email, password };
-    const response = await loginClient(data);
+    const loginFormData = { email, password };
+    const response = await loginClient(loginFormData);
     console.log(response);
   }
 
   return {
-    handleEmailChange,
     handlePasswordChange,
     handleSubmit,
     // error,
