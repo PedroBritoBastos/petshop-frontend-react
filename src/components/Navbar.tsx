@@ -2,7 +2,7 @@ import { useAuthContext } from "../hooks/useAuthContext"
 import { useNavigate } from "react-router-dom";
 
 export function Navbar() {
-  const { isAuthenticated } = useAuthContext();
+  const { isLogged } = useAuthContext();
   const navigate = useNavigate();
 
   return (
@@ -13,7 +13,7 @@ export function Navbar() {
         </div>
 
         {/* links quando usuario nao estiver logado */}
-        {isAuthenticated ? (
+        {isLogged ? (
           <div className="flex items-center gap-2">
             <div
               className="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-foreground"
