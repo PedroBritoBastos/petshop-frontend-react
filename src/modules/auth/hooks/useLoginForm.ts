@@ -23,8 +23,7 @@ export function useLoginForm() {
     if (!email || !password) return;
 
     const loginFormData = { email, password };
-    const response = await loginClient(loginFormData);
-    console.log(response);
+    await loginClient(loginFormData);
   }
 
   return {
