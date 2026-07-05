@@ -8,12 +8,12 @@ import { useAuthContext } from "../../../../hooks/useAuthContext";
 
 export function useClientService() {
   const navigate = useNavigate();
-  const { loginAfterRegister } = useAuthContext();
+  const authContext = useAuthContext();
 
   async function registerClient(registerFormData: RegisterFormData) {
     try {
-      const registeredClient: Client = await register(registerFormData);
-      loginAfterRegister(registeredClient);
+      const client: Client = await register(registerFormData);
+      authContext.login(client);
       navigate("/client");
     } catch (error) {
       if (error instanceof Error) {

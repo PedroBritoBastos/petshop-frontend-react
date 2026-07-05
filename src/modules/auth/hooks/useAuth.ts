@@ -1,9 +1,14 @@
-import { login } from "../../../services/auth/authService";
-import { useAuthContext } from "../../../hooks/useAuthContext";
 import type { LoginFormData } from "../types/LoginFormData";
+import type { Client } from "../../client/types/Client";
+
+import { login } from "../../../services/auth/authService";
+
+import { useAuthContext } from "../../../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 export function useAuth() {
   const authContext = useAuthContext();
+  const navigate = useNavigate();
 
   /* 
     - pega os dados do service
@@ -11,9 +16,9 @@ export function useAuth() {
   */
   async function loginClient(loginFormData: LoginFormData) {
     try {
-      const response = await login(loginFormData);
-      authContext.login();
-      return response;
+      const client: Client = await login(loginFormData);
+      authContext.login(client);
+      navigate("/client");
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message);

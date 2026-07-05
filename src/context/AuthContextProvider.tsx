@@ -7,14 +7,9 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
   const [loggedClient, setLoggedClient] = useState<Client | null>(null);
 
   /* faz login de usuário */
-  async function login() {
+  async function login(client: Client) {
     setIsLogged(true);
-  }
-
-  /* faz login de usuario automaticamente após registrar-se */
-  async function loginAfterRegister(registeredClient: Client) {
-    setIsLogged(true);
-    setLoggedClient(registeredClient);
+    setLoggedClient(client);
   }
 
   /* faz logout de usuário */
@@ -27,7 +22,6 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
       isLogged,
       loggedClient,
       login,
-      loginAfterRegister,
       logout
     }}>
       {children}

@@ -4,8 +4,7 @@ import type { Client } from "../modules/client/types/Client";
 type AuthContextProps = {
   isLogged: boolean;
   loggedClient: Client | null;
-  login: () => void;
-  loginAfterRegister: (registeredClient: Client) => void;
+  login: (client: Client) => void;
   logout: () => void;
 };
 

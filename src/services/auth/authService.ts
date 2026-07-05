@@ -20,5 +20,5 @@ export async function login(loginFormData: LoginFormData) {
   }
 
   // retorna os dados
-  return await response.json();
+  return (await response.json()).client;
 }

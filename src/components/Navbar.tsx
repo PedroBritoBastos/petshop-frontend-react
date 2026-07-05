@@ -2,7 +2,7 @@ import { useAuthContext } from "../hooks/useAuthContext"
 import { useNavigate } from "react-router-dom";
 
 export function Navbar() {
-  const { isLogged } = useAuthContext();
+  const { isLogged, loggedClient } = useAuthContext();
   const navigate = useNavigate();
 
   return (
@@ -35,7 +35,7 @@ export function Navbar() {
               </svg>
             </div>
 
-            <p className="text-foreground">{'email'}</p>
+            <p className="text-foreground">{loggedClient?.email}</p>
           </div>
         ) : (
           <div className="text-foreground flex items-center gap-4">
