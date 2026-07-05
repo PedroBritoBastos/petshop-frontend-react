@@ -22,5 +22,5 @@ export async function register(registerFormData: RegisterFormData) {
     throw new Error(error.message);
   }
 
-  console.log(await response.json());
+  return await response.json();
 }

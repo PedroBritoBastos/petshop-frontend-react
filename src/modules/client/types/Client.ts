@@ -5,7 +5,4 @@ export type Client = {
   phone: string;
   cpf: string;
   imageUrl?: string;
-  role: string;
-  createdAt: string;
-  updatedAt: string;
 };
