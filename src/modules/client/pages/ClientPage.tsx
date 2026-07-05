@@ -2,6 +2,8 @@ import { Navbar } from "../../../components/Navbar";
 //import { AvailableAdoptionCard } from "../components/AvailableAdoptionCard";
 import { PetshopServiceCard } from "../components/PetshopServiceCard";
 
+import clientPageHeroImage from "../../../assets/client-page-hero-image.jpg";
+
 export default function ClientPage() {
   return (
     <div className="w-full">
@@ -31,7 +33,7 @@ export default function ClientPage() {
         </div>
         <div
           className="hidden md:block bg-green-100 md:flex-1 bg-cover relative rounded-lg shadow-lg objetc-[]"
-          style={{ backgroundImage: "url('assets/client-page-hero-image.jpg')" }}
+          style={{ backgroundImage: `url(${clientPageHeroImage})` }}
         >
           <div className="absolute inset-0 bg-muted/20"></div>
         </div>

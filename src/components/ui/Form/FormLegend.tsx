@@ -7,11 +7,17 @@ interface Props {
 export function FormLegend({ legend }: Props) {
   const navigate = useNavigate();
 
+  function handleNavigateToHome(e: React.MouseEvent<HTMLButtonElement>) {
+    e.stopPropagation();
+    e.preventDefault();
+    navigate("/");
+  }
+
   return (
     <div className="flex flex-col md:flex-row md:justify-between items-center gap-2">
       <h1 className="text-3xl text-accent-foreground font-bold">{legend}</h1>
       <button
-        onClick={() => navigate("/")}
+        onClick={handleNavigateToHome}
         className="flex items-center justify-center gap-1 w-fit text-card-foreground hover:text-card-foreground/60 cursor-pointer"
       >
         <svg
@@ -30,8 +36,8 @@ export function FormLegend({ legend }: Props) {
           <path d="M21 12H9" />
           <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
         </svg>
-        Página principal</button
-      >
+        Página principal
+      </button>
     </div>
   )
 }
