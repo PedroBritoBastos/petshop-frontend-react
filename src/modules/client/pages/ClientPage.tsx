@@ -1,11 +1,20 @@
-//import { useClientPage } from "../hooks/clientPage/useClientPage";
-
 import { Navbar } from "../../../components/Navbar";
 //import { AvailableAdoptionCard } from "../components/AvailableAdoptionCard";
 import { PetshopServiceCard } from "../components/PetshopServiceCard";
 
+import { useEffect } from "react";
+import { useAuth } from "../../auth/hooks/useAuth";
+import { useAuthContext } from "../../../hooks/useAuthContext";
+
 export default function ClientPage() {
-  //const { availablePets } = useClientPage();
+  const auth = useAuth();
+
+  useEffect(() => {
+    async function loadClient() {
+      await auth.isClientLogged();
+    }
+    loadClient();
+  }, [])
 
   return (
     <div className="w-full">

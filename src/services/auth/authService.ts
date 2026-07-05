@@ -22,3 +22,14 @@ export async function login(loginFormData: LoginFormData) {
   // retorna os dados
   return (await response.json()).client;
 }
+
+export async function getLoggedClient() {
+  const response = await fetch(`${API}/auth/get`, { credentials: "include" });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+
+  return await response.json();
+}

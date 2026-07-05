@@ -1,10 +1,11 @@
 import type { LoginFormData } from "../types/LoginFormData";
 import type { Client } from "../../client/types/Client";
 
-import { login } from "../../../services/auth/authService";
+import { login, getLoggedClient } from "../../../services/auth/authService";
 
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export function useAuth() {
   const authContext = useAuthContext();
@@ -26,5 +27,22 @@ export function useAuth() {
     }
   }
 
-  return { loginClient };
+  async function isClientLogged() {
+    try {
+      const client = await getLoggedClient();
+
+      if (!client) {
+        console.log("Cliente não está logado.");
+        return;
+      }
+
+      authContext.login(client);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+    }
+  }
+
+  return { loginClient, isClientLogged };
 }
