@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AuthContext } from "./AuthContext";
 
 export function AuthContextProvider({ children }: { children: React.ReactNode }) {
-  const [isLogged, setIsLogged] = useState<boolean>(false);
+  const [isLogged, setIsLogged] = useState<boolean>(true);
 
   /* faz login de usuário */
   async function login() {

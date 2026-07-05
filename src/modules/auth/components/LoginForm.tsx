@@ -4,6 +4,8 @@ import { Form } from "../../../components/ui/Form"
 
 export function LoginForm() {
   const {
+    email,
+    password,
     handleEmailChange,
     handlePasswordChange,
     handleSubmit,
@@ -23,6 +25,7 @@ export function LoginForm() {
         label="Email"
         type="text"
         placeholder="example@email.com"
+        value={email}
         onChange={handleEmailChange}
       />
 
@@ -31,6 +34,7 @@ export function LoginForm() {
         label="Senha"
         type="password"
         placeholder="Digite sua senha"
+        value={password}
         onChange={handlePasswordChange}
       />
 

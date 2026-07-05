@@ -49,6 +49,7 @@ export function useRegisterForm() {
     name,
     email,
     password,
+    confirmPassword,
     phone,
     cpf,
     handleNameChange,

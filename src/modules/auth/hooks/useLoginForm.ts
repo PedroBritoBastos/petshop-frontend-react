@@ -28,6 +28,8 @@ export function useLoginForm() {
   }
 
   return {
+    email,
+    password,
     handleEmailChange,
     handlePasswordChange,
     handleSubmit,
