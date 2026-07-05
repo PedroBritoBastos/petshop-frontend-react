@@ -1,6 +1,19 @@
 import { LoginForm } from "../components/LoginForm"
+import { useAuthContext } from "../../../hooks/useAuthContext"
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function LoginPage() {
+  const authContext = useAuthContext();
+  const navigate = useNavigate();
+
+  /* verifica se o cliente está logado. Se não estiver logado, deve ser redirecionado para a pagina principal */
+  useEffect(() => {
+    if (authContext.isLogged) {
+      navigate("/client");
+      return;
+    }
+  }, [authContext.isLogged]);
 
   return (
     <div className="flex items-center md:items-start w-full h-screen">
