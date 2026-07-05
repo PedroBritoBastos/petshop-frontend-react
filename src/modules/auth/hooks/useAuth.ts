@@ -5,7 +5,6 @@ import { login, getLoggedClient } from "../../../services/auth/authService";
 
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 export function useAuth() {
   const authContext = useAuthContext();
@@ -36,7 +35,7 @@ export function useAuth() {
         return;
       }
 
-      authContext.login(client);
+      return client;
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);
