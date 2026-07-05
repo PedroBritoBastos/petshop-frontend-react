@@ -4,6 +4,8 @@ import { useAuthContext } from "../../../hooks/useAuthContext"
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
+import registerPageBackgroundImage from "../../../assets/register-page-image.jpg"
+
 export default function RegisterPage() {
   const authContext = useAuthContext();
   const navigate = useNavigate();
@@ -17,10 +19,10 @@ export default function RegisterPage() {
   }, [authContext.isLogged]);
 
   return (
-    <div className="w-full h-screen flex gap-5 bg-primary-foreground overflow-auto">
+    <div className="w-full h-screen flex gap-5 bg-primary-foreground overflow-hidden">
       <div
         className="bg-ring w-[50%] hidden md:block bg-cover bg-[80%_90%] relative"
-        style={{ backgroundImage: "url('assets/register-page-image.jpg')" }}
+        style={{ backgroundImage: `url(${registerPageBackgroundImage})` }}
       >
         <div className="absolute inset-0 bg-ring/40"></div>
       </div>
