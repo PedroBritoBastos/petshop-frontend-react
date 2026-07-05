@@ -9,6 +9,10 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const [loggedClient, setLoggedClient] = useState<Client | null>(null);
 
+  /* 
+  * Verifica se existe cliente logado a cada re-renderização.
+  * Se existir, deve logar automaticamente e colocar os dados do cliente logado no estado global
+  */
   useEffect(() => {
     async function verifyIfClientIsLogged() {
       const client = await auth.isClientLogged();
