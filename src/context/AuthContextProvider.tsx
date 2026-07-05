@@ -16,8 +16,10 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
   useEffect(() => {
     async function verifyIfClientIsLogged() {
       const client = await auth.isClientLogged();
-      setLoggedClient(client);
-      setIsLogged(true);
+      if (client !== undefined) {
+        setLoggedClient(client);
+        setIsLogged(true);
+      }
     }
     verifyIfClientIsLogged();
   }, []);
@@ -31,6 +33,7 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
   /* faz logout de usuário */
   async function logout() {
     setIsLogged(false);
+    setLoggedClient(null);
   }
 
   return (

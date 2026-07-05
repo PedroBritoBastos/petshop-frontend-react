@@ -1,9 +1,14 @@
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
+import { useNavbar } from "../hooks/useNavbar";
 
 export function Navbar() {
   const { isLogged, loggedClient } = useAuthContext();
   const navigate = useNavigate();
+  const navbar = useNavbar();
+
+  console.log(loggedClient)
+  console.log(isLogged)
 
   return (
     <nav className="w-full border-b border-accent p-4 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
@@ -59,7 +64,7 @@ export function Navbar() {
       {/* Menu */}
       {isLogged && (
         <div className="flex flex-wrap items-center gap-4 text-sm md:text-base text-foreground">
-          <button className="flex items-center gap-2 hover:text-foreground/60 cursor-pointer">
+          <button className="flex items-center gap-2 hover:text-foreground/60 cursor-pointer" onClick={navbar.handleLogout}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="22"

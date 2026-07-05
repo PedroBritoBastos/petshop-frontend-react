@@ -1,7 +1,7 @@
 import type { LoginFormData } from "../types/LoginFormData";
 import type { Client } from "../../client/types/Client";
 
-import { login, getLoggedClient } from "../../../services/auth/authService";
+import { login, logout, getLoggedClient } from "../../../services/auth/authService";
 
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
@@ -26,22 +26,27 @@ export function useAuth() {
     }
   }
 
-  async function isClientLogged() {
+  async function logoutClient() {
     try {
-      const client = await getLoggedClient();
-
-      if (!client) {
-        console.log("Cliente não está logado.");
-        return;
-      }
-
-      return client;
+      await logout();
+      authContext.logout();
+      navigate("/login");
     } catch (error) {
       if (error instanceof Error) {
-        console.log(error.message);
+        //  console.log(error.message);
       }
     }
   }
 
-  return { loginClient, isClientLogged };
+  async function isClientLogged() {
+    try {
+      return await getLoggedClient();
+    } catch (error) {
+      if (error instanceof Error) {
+        //  console.log(error.message);
+      }
+    }
+  }
+
+  return { loginClient, logoutClient, isClientLogged };
 }

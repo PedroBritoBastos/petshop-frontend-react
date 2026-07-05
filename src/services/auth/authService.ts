@@ -23,6 +23,24 @@ export async function login(loginFormData: LoginFormData) {
   return (await response.json()).client;
 }
 
+export async function logout() {
+  // envia dados para a api
+  const response = await fetch(`${API}/auth/logout`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({}),
+  });
+
+  // lança erro caso tenha
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+}
+
 export async function getLoggedClient() {
   const response = await fetch(`${API}/auth/get`, { credentials: "include" });
 
