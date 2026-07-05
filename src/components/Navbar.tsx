@@ -7,9 +7,6 @@ export function Navbar() {
   const navigate = useNavigate();
   const navbar = useNavbar();
 
-  console.log(loggedClient)
-  console.log(isLogged)
-
   return (
     <nav className="w-full border-b border-accent p-4 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
       {/* Logo + Login/Usuário */}

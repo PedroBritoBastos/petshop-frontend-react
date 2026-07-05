@@ -8,7 +8,7 @@ import AdminLayout from "./modules/admin/layout/AdminLayout";
 function App() {
   return (
     <Routes>
-      <Route path='/client' element={<ClientPage />} />
+      <Route path='/' element={<ClientPage />} />
       <Route path='/login' element={<LoginPage />} />
       <Route path='/register' element={<RegisterPage />} />
       <Route path='/register' element={<RegisterPage />} />

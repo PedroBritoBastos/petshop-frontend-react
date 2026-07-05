@@ -16,7 +16,7 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
   useEffect(() => {
     async function verifyIfClientIsLogged() {
       const client = await auth.isClientLogged();
-      if (client !== undefined) {
+      if (client !== undefined && client !== null) {
         setLoggedClient(client);
         setIsLogged(true);
       }

@@ -18,7 +18,7 @@ export function useAuth() {
     try {
       const client: Client = await login(loginFormData);
       authContext.login(client);
-      navigate("/client");
+      navigate("/");
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message);

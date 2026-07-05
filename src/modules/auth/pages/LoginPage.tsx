@@ -10,7 +10,7 @@ export default function LoginPage() {
   /* verifica se o cliente está logado. Se não estiver logado, deve ser redirecionado para a pagina principal */
   useEffect(() => {
     if (authContext.isLogged) {
-      navigate("/client");
+      navigate("/");
       return;
     }
   }, [authContext.isLogged]);

@@ -14,7 +14,7 @@ export function useClientService() {
     try {
       const client: Client = await register(registerFormData);
       authContext.login(client);
-      navigate("/client");
+      navigate("/");
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message);
