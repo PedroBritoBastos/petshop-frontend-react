@@ -23,7 +23,6 @@ export async function getClientAdoptedPets(clientId: string) {
 }
 
 export async function create(registerPetFormData: FormData) {
-  // envia dados para a api
   const response = await fetch(`${API}/pets`, {
     method: "POST",
     credentials: "include",

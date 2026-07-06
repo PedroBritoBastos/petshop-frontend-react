@@ -82,7 +82,7 @@ export function Navbar() {
             Sair
           </button>
 
-          <button className="hover:text-foreground/60 cursor-pointer">
+          <button className="hover:text-foreground/60 cursor-pointer" onClick={() => navigate("/my-adoptions")}>
             Minhas adoções
           </button>
 

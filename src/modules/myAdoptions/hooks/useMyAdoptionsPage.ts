@@ -2,9 +2,10 @@ import { useAuthContext } from "../../../hooks/useAuthContext";
 import { usePetService } from "../../../hooks/usePetService";
 import { useState, useEffect } from "react";
 
-export function useRequestPetshopServicePage() {
+export function useMyAdoptionsPage() {
   const authContext = useAuthContext();
   const petService = usePetService();
+  const loggedClient = authContext.loggedClient;
 
   const [clientAdoptedPets, setClientAdoptedPets] = useState([]);
 
@@ -17,5 +18,5 @@ export function useRequestPetshopServicePage() {
     loadClientAdoptedPets();
   }, []);
 
-  return { clientAdoptedPets };
+  return { loggedClient, clientAdoptedPets };
 }
