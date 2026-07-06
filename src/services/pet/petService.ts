@@ -4,8 +4,9 @@ export async function getAvailablePets() {
   const response = await fetch(`${API}/pets/available`);
 
   if (!response.ok) {
-    throw new Error("Erro ao buscar pets disponíveis.");
+    const error = await response.json();
+    throw new Error(error.message);
   }
 
-  return response.json();
+  return (await response.json()).result;
 }
