@@ -48,7 +48,7 @@ export default function MyAdoptionsPage() {
         Serviços solicitados
       </h1>
       <div className="grid grid-cols-1 gap-4 p-5 md:px-20 xl:px-40">
-
+        {myAdoptionsPage.clientPetshopServices.length === 0 ? "Nenhum serviço solicitado." : ""}
       </div>
     </div >
 
