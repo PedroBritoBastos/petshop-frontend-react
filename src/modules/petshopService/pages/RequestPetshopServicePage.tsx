@@ -1,8 +1,16 @@
 import { Form } from "../../../components/ui/Form"
 import { useNavigate } from "react-router-dom"
+import { useRequestPetshopServicePage } from "../hooks/useRequestPetshopServicePage";
+import { useAuthContext } from "../../../hooks/useAuthContext";
 
 export default function RequestPetshopServicePage() {
   const navigate = useNavigate();
+  const requestPetshopServicePage = useRequestPetshopServicePage();
+  const authContext = useAuthContext();
+
+  if (!authContext.isLogged) {
+    navigate("/")
+  }
 
   return (
     <div className="bg-primary/10 min-h-screen">
@@ -66,6 +74,9 @@ export default function RequestPetshopServicePage() {
                 className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
               >
                 <option value="">Selecione um pet</option>
+                {requestPetshopServicePage.clientAdoptedPets.map((clientAdoptedPet) => (
+                  <option>{clientAdoptedPet}</option>
+                ))}
               </select>
             </div>
 

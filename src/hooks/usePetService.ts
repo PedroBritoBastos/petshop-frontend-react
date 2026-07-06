@@ -1,4 +1,4 @@
-import { getAvailablePets, create } from "../services/pet/petService";
+import { getAvailablePets, getClientAdoptedPets, create } from "../services/pet/petService";
 
 export function usePetService() {
   async function getAvailable() {
@@ -21,5 +21,15 @@ export function usePetService() {
     }
   }
 
-  return { getAvailable, register };
+  async function getAdoptedPetsByClientId(clientId: string) {
+    try {
+      return await getClientAdoptedPets(clientId);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+    }
+  }
+
+  return { getAvailable, getAdoptedPetsByClientId, register };
 }

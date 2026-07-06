@@ -11,6 +11,17 @@ export async function getAvailablePets() {
   return (await response.json()).result;
 }
 
+export async function getClientAdoptedPets(clientId: string) {
+  const response = await fetch(`${API}/pets/adopted/${clientId}`, { credentials: "include" });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+
+  return (await response.json()).result;
+}
+
 export async function create(registerPetFormData: FormData) {
   // envia dados para a api
   const response = await fetch(`${API}/pets`, {
