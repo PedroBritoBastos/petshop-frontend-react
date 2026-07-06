@@ -90,7 +90,7 @@ export function Navbar() {
             Cadastrar um pet
           </button>
 
-          <button className="hover:text-foreground/60 cursor-pointer">
+          <button className="hover:text-foreground/60 cursor-pointer" onClick={() => navigate("/petshop-services/request")}>
             Solicitar um serviço
           </button>
         </div>

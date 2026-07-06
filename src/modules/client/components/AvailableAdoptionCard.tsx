@@ -12,6 +12,8 @@ export function AvailableAdoptionCard({
   imageUrl
 }: Props) {
 
+  console.log(`${API}/${imageUrl.replace("undefined/", "")}`)
+
   return (
     <div
       className="border-accent border-1 rounded-md overflow-hidden hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1"

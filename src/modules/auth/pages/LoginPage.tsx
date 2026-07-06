@@ -20,7 +20,7 @@ export default function LoginPage() {
   return (
     <div className="flex items-center md:items-start w-full h-screen">
       <div
-        className="bg-ring w-[50%] h-full hidden md:block bg-cover bg-[80%_50%] relative"
+        className="bg-ring flex-1 h-full hidden md:block bg-cover bg-[80%_50%] relative"
         style={{ backgroundImage: `url(${loginPageBackgroundImage})` }}
       >
         <div className="absolute inset-0 bg-ring/40"></div>

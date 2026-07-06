@@ -4,6 +4,8 @@ import { Navbar } from "../../../components/Navbar";
 import { AvailableAdoptionCard } from "../components/AvailableAdoptionCard";
 import { PetshopServiceCard } from "../components/PetshopServiceCard";
 
+import type { Pet } from "../../../types/Pet";
+
 import clientPageHeroImage from "../../../assets/client-page-hero-image.jpg";
 
 export default function ClientPage() {
@@ -51,9 +53,9 @@ export default function ClientPage() {
         <div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 py-10 lg:px-10 xl:px-15"
         >
-          {clientPage.availablePets.map((availablePet: any) => (
+          {clientPage.availablePets.map((availablePet: Pet) => (
             <AvailableAdoptionCard
-              key={availablePet.petId}
+              key={availablePet.id}
               name={availablePet.name}
               age={availablePet.age}
               imageUrl={availablePet.imageUrl}

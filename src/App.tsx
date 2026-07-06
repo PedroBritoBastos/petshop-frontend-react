@@ -4,6 +4,7 @@ import ClientPage from "./modules/client/pages/ClientPage";
 import LoginPage from "./modules/auth/pages/LoginPage";
 import RegisterPage from "./modules/client/pages/RegisterPage";
 import RegisterPetPage from "./modules/pet/pages/RegisterPetPage";
+import RequestPetshopServicePage from "./modules/petshopService/pages/RequestPetshopServicePage";
 import AdminLayout from "./modules/admin/layout/AdminLayout";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Route path='/login' element={<LoginPage />} />
       <Route path='/register' element={<RegisterPage />} />
       <Route path='/pet/register' element={<RegisterPetPage />} />
+      <Route path='/petshop-services/request' element={<RequestPetshopServicePage />} />
       <Route path='/admin' element={<AdminLayout />} />
     </Routes>
   )
