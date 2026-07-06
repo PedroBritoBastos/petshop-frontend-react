@@ -75,7 +75,7 @@ export default function RequestPetshopServicePage() {
               >
                 <option value="">Selecione um pet</option>
                 {requestPetshopServicePage.clientAdoptedPets.map((clientAdoptedPet) => (
-                  <option>{clientAdoptedPet}</option>
+                  <option value={clientAdoptedPet.name} key={clientAdoptedPet.id}>{clientAdoptedPet.name}</option>
                 ))}
               </select>
             </div>
