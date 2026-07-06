@@ -1,4 +1,5 @@
 import { Form } from "../../../components/ui/Form";
+import { ImagePreview } from "./ImagePreview";
 
 import { useRegisterPetForm } from "../hooks/useRegisterPetForm";
 
@@ -17,6 +18,8 @@ export function RegisterPetForm() {
         Foto do pet
         <span className="text-xs ml-2">Tamanho máximo: 5MB</span>
       </label>
+
+      <ImagePreview file={registerPetForm.selectedPhoto} />
 
       <input
         id="upload-file"
