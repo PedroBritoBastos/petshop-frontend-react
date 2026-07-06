@@ -94,7 +94,7 @@ export function RegisterPetForm() {
         onChange={registerPetForm.handleWeightChange}
       />
 
-      <Form.Button>Cadastrar</Form.Button>
+      <Form.Button type="submit">Cadastrar</Form.Button>
     </Form.Root>
   );
 }

@@ -1,4 +1,4 @@
-import { getAvailablePets } from "../services/pet/petService";
+import { getAvailablePets, create } from "../services/pet/petService";
 
 export function usePetService() {
   async function getAvailable() {
@@ -11,5 +11,15 @@ export function usePetService() {
     }
   }
 
-  return { getAvailable };
+  async function register(registerPetFormData: FormData) {
+    try {
+      return await create(registerPetFormData);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+    }
+  }
+
+  return { getAvailable, register };
 }

@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { usePetService } from "../../../hooks/usePetService";
+import { useNavigate } from "react-router-dom";
 
 export function useRegisterPetForm() {
+  const petService = usePetService();
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [weight, setWeight] = useState("");
@@ -35,15 +40,21 @@ export function useRegisterPetForm() {
     setSelectedPhoto(file);
   }
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    console.log({
-      name,
-      age,
-      weight,
-      photo: selectedPhoto,
-    });
+    const registerPetFormData = new FormData();
+
+    registerPetFormData.append("name", name);
+    registerPetFormData.append("age", age);
+    registerPetFormData.append("weight", weight);
+
+    if (selectedPhoto) {
+      registerPetFormData.append("petPhoto", selectedPhoto);
+    }
+
+    await petService.register(registerPetFormData);
+    navigate("/");
   }
 
   return {
