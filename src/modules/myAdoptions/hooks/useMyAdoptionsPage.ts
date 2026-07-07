@@ -1,3 +1,6 @@
+import type { PetshopService } from "../../petshopService/types/PetshopService";
+import type { Pet } from "../../../types/Pet";
+
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { usePetService } from "../../../hooks/usePetService";
 import { usePetshopServiceService } from "../../../hooks/usePetshopServiceService";
@@ -9,25 +12,28 @@ export function useMyAdoptionsPage() {
   const petshopServiceService = usePetshopServiceService();
   const loggedClient = authContext.loggedClient;
 
-  const [clientAdoptedPets, setClientAdoptedPets] = useState([]);
-  const [clientPetshopServices, setClientPetshopServices] = useState([]);
+  const [clientAdoptedPets, setClientAdoptedPets] = useState<Pet[]>([]);
+  const [clientPetshopServices, setClientPetshopServices] = useState<PetshopService[]>([]);
 
   /* O effect precisa chamar o service e guardar todos os pets adotados do cliente logado no estado logo assim que carregar a pagina */
   /* O effect precisa chamar o service e guardar todos os serviços do cliente logado no estado quando carregar a página */
   useEffect(() => {
-    async function loadClientAdoptedPets() {
+    async function loadData() {
+      /* vai trazer os pets adotados do cliente */
       const pets = await petService.getAdoptedPetsByClientId(authContext.loggedClient?.id as string);
       setClientAdoptedPets(pets);
-    }
 
-    async function loadClientPetshopServices() {
+      /* cria uma nova lista com os nomes dos pets de acordo com o petId */
       const petshopServices = await petshopServiceService.getClientPetshopServices();
-      setClientPetshopServices(petshopServices);
+      const petshopServicesWithPetName = petshopServices.map((petshopService: PetshopService) => ({
+        ...petshopService,
+        petName: pets.find((pet: Pet) => pet.id === petshopService.petId)?.name,
+      }));
+      setClientPetshopServices(petshopServicesWithPetName);
     }
 
-    loadClientAdoptedPets();
-    loadClientPetshopServices();
-  }, []);
+    loadData();
+  }, [authContext.loggedClient]);
 
   return { loggedClient, clientAdoptedPets, clientPetshopServices };
 }

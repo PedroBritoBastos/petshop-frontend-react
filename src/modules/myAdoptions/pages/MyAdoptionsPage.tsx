@@ -11,6 +11,9 @@ export default function MyAdoptionsPage() {
   const myAdoptionsPage = useMyAdoptionsPage();
   const navigate = useNavigate();
 
+  console.log(myAdoptionsPage.clientAdoptedPets)
+  console.log(myAdoptionsPage.clientPetshopServices)
+
   return (
     <div className="min-h-screen bg-primary/10">
       <nav className="w-full bg-white border-b-1 border-border p-4 flex items-center justify-between">
@@ -54,10 +57,11 @@ export default function MyAdoptionsPage() {
         Serviços solicitados
       </h1>
       <div className="grid grid-cols-1 gap-4 p-5 md:px-20 xl:px-40">
-        {myAdoptionsPage.clientPetshopServices.length === 0 ? "Nenhum serviço solicitado." : myAdoptionsPage.clientPetshopServices.map((petshopService: PetshopServiceType) => (
+        {myAdoptionsPage.clientPetshopServices.length === 0 ? "Nenhum serviço solicitado." : myAdoptionsPage.clientPetshopServices.map((petshopService) => (
           <PetshopService
+            key={petshopService.id}
             type={petshopService.type}
-            petName={petshopService.petId}
+            petName={petshopService.petName}
             executionDate={formatDate(petshopService.executionDate)}
           />
         ))}
