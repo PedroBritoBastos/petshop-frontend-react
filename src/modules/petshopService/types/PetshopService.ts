@@ -8,3 +8,7 @@ export type PetshopService = {
   type: string;
   updatedAt: string;
 };
+
+export type PetshopServiceWithPetName = PetshopService & {
+  petName: string;
+};

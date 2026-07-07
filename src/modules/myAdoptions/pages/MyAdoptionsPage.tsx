@@ -1,5 +1,3 @@
-import type { PetshopService as PetshopServiceType } from "../../petshopService/types/PetshopService";
-
 import { useMyAdoptionsPage } from "../hooks/useMyAdoptionsPage";
 import { useNavigate } from "react-router-dom";
 
@@ -10,9 +8,6 @@ import { PetshopService } from "../components/PetshopService";
 export default function MyAdoptionsPage() {
   const myAdoptionsPage = useMyAdoptionsPage();
   const navigate = useNavigate();
-
-  console.log(myAdoptionsPage.clientAdoptedPets)
-  console.log(myAdoptionsPage.clientPetshopServices)
 
   return (
     <div className="min-h-screen bg-primary/10">
@@ -67,6 +62,5 @@ export default function MyAdoptionsPage() {
         ))}
       </div>
     </div >
-
   )
 }
