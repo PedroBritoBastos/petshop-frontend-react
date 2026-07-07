@@ -42,7 +42,9 @@ export default function RequestPetshopServicePage() {
 
       <div className="flex justify-center p-6 md:p-10">
         <div className="w-full max-w-2xl bg-white rounded-2xl border border-border shadow-sm">
-          <Form.Root>
+
+          {/* Formulario */}
+          <Form.Root onSubmit={requestPetshopServicePage.handleSubmit}>
             <div className="text-center md:text-start mb-3">
               <h1 className="text-3xl text-accent-foreground font-bold">Solicitar serviço</h1>
 
@@ -55,6 +57,8 @@ export default function RequestPetshopServicePage() {
               <label className="text-sm font-medium text-card-foreground"> Tipo de serviço </label>
 
               <select
+                value={requestPetshopServicePage.service}
+                onChange={requestPetshopServicePage.handleServiceChange}
                 title="services"
                 className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
               >
@@ -70,15 +74,19 @@ export default function RequestPetshopServicePage() {
               <label className="text-sm font-medium text-card-foreground"> Pet </label>
 
               <select
+                value={requestPetshopServicePage.selectedPetId}
+                onChange={requestPetshopServicePage.handlePetChange}
                 title="pets"
                 className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
               >
                 <option value="">Selecione um pet</option>
                 {requestPetshopServicePage.clientAdoptedPets.map((clientAdoptedPet) => (
-                  <option value={clientAdoptedPet.name} key={clientAdoptedPet.id}>{clientAdoptedPet.name}</option>
+                  <option value={clientAdoptedPet.id} key={clientAdoptedPet.id}>{clientAdoptedPet.name}</option>
                 ))}
               </select>
             </div>
+
+            <Form.Field type="date" id="execution-date" label="Data de execução" value={requestPetshopServicePage.executionDate} onChange={requestPetshopServicePage.handleExecutionDateChange} />
 
             <Form.Button
               type="submit"
@@ -86,6 +94,8 @@ export default function RequestPetshopServicePage() {
               Confirmar solicitação
             </Form.Button>
           </Form.Root>
+          {/* Formulario */}
+
         </div >
       </div >
     </div >

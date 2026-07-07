@@ -1,4 +1,5 @@
-import { getPetshopServices } from "../services/petshopService/petshopServiceService";
+import type { RequestPetshopServiceFormData } from "../modules/petshopService/types/RequestPetshopService";
+import { getPetshopServices, request } from "../services/petshopService/petshopServiceService";
 
 export function usePetshopServiceService() {
   async function getClientPetshopServices() {
@@ -11,5 +12,15 @@ export function usePetshopServiceService() {
     }
   }
 
-  return { getClientPetshopServices };
+  async function requestPetshopService(requestPetshopServiceFormData: RequestPetshopServiceFormData) {
+    try {
+      await request(requestPetshopServiceFormData);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+    }
+  }
+
+  return { getClientPetshopServices, requestPetshopService };
 }
