@@ -1,5 +1,11 @@
+import type { PetshopService as PetshopServiceType } from "../../petshopService/types/PetshopService";
+
 import { useMyAdoptionsPage } from "../hooks/useMyAdoptionsPage";
 import { useNavigate } from "react-router-dom";
+
+import { formatDate } from "../../../utils/dateFormatter";
+
+import { PetshopService } from "../components/PetshopService";
 
 export default function MyAdoptionsPage() {
   const myAdoptionsPage = useMyAdoptionsPage();
@@ -48,7 +54,13 @@ export default function MyAdoptionsPage() {
         Serviços solicitados
       </h1>
       <div className="grid grid-cols-1 gap-4 p-5 md:px-20 xl:px-40">
-        {myAdoptionsPage.clientPetshopServices.length === 0 ? "Nenhum serviço solicitado." : ""}
+        {myAdoptionsPage.clientPetshopServices.length === 0 ? "Nenhum serviço solicitado." : myAdoptionsPage.clientPetshopServices.map((petshopService: PetshopServiceType) => (
+          <PetshopService
+            type={petshopService.type}
+            petName={petshopService.petId}
+            executionDate={formatDate(petshopService.executionDate)}
+          />
+        ))}
       </div>
     </div >
 
