@@ -1,35 +1,15 @@
 import { Form } from "../../../components/ui/Form";
 import { ImagePreview } from "./ImagePreview";
-
+import { NavigateToHomeButton } from "../../../components/ui/NavigateToHomeButton";
 import { useRegisterPetForm } from "../hooks/useRegisterPetForm";
-import { useNavigate } from "react-router-dom";
 
 export function RegisterPetForm() {
   const registerPetForm = useRegisterPetForm();
-  const navigate = useNavigate();
 
   return (
     <Form.Root onSubmit={registerPetForm.handleSubmit}>
       <div className="flex flex-col sm:flex-row-reverse sm:justify-between items-center gap-1 mb-4" >
-        <button className="flex items-center gap-1 hover:cursor-pointer" onClick={() => navigate("/")}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-log-out"
-          >
-            <path d="m16 17 5-5-5-5" />
-            <path d="M21 12H9" />
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-          </svg>
-          Voltar
-        </button>
+        <NavigateToHomeButton />
         <h1 className="text-center text-2xl font-bold text-accent-foreground">Cadastre seu pet</h1>
       </div>
 
