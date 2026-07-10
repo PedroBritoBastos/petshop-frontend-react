@@ -6,6 +6,10 @@ import { NavigateToHomeButton } from "../../../components/ui/NavigateToHomeButto
 export default function MyAdoptionsPage() {
   const myAdoptionsPage = useMyAdoptionsPage();
 
+  if (myAdoptionsPage.loading) {
+    return (<div className="bg-primary/10 w-screen h-screen">Carregando...</div>)
+  }
+
   return (
     <div className="min-h-screen bg-primary/10">
       <nav className="w-full bg-white border-b-1 border-border p-4 flex items-center justify-between">
@@ -14,7 +18,6 @@ export default function MyAdoptionsPage() {
         </div>
         <NavigateToHomeButton />
       </nav>
-
 
       <h1 className="text-xl text-foreground font-bold ml-5 md:ml-20 xl:ml-40 mt-5">Minhas adoções</h1>
       <div

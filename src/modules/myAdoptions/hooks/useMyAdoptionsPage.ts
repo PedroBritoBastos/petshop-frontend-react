@@ -1,7 +1,6 @@
 import type { PetshopService } from "../../petshopService/types/PetshopService";
 import type { PetshopServiceWithPetName } from "../../petshopService/types/PetshopService";
 import type { Pet } from "../../../types/Pet";
-
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { usePetService } from "../../../hooks/usePetService";
 import { usePetshopServiceService } from "../../../hooks/usePetshopServiceService";
@@ -15,6 +14,7 @@ export function useMyAdoptionsPage() {
 
   const [clientAdoptedPets, setClientAdoptedPets] = useState<Pet[]>([]);
   const [clientPetshopServices, setClientPetshopServices] = useState<PetshopServiceWithPetName[]>([]);
+  const [loading, setLoading] = useState(true);
 
   /* O effect precisa chamar o service e guardar todos os pets adotados do cliente logado no estado logo assim que carregar a pagina */
   /* O effect precisa chamar o service e guardar todos os serviços do cliente logado no estado quando carregar a página */
@@ -31,10 +31,11 @@ export function useMyAdoptionsPage() {
         petName: pets.find((pet: Pet) => pet.id === petshopService.petId)?.name,
       }));
       setClientPetshopServices(petshopServicesWithPetName);
+      setLoading(false);
     }
 
     loadData();
   }, [authContext.loggedClient]);
 
-  return { loggedClient, clientAdoptedPets, clientPetshopServices };
+  return { loggedClient, clientAdoptedPets, loading, clientPetshopServices };
 }

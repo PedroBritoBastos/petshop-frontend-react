@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { usePetService } from "../../../hooks/usePetService";
 import { useNavigate } from "react-router-dom";
+import { useErrorMessageContext } from "../../../hooks/useErrorMessageContext";
 
 export function useRegisterPetForm() {
   const petService = usePetService();
   const navigate = useNavigate();
+  const errorMessageContext = useErrorMessageContext();
 
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [weight, setWeight] = useState("");
   const [selectedPhoto, setSelectedPhoto] = useState<File | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     setName(e.target.value);
@@ -53,8 +56,15 @@ export function useRegisterPetForm() {
       registerPetFormData.append("petPhoto", selectedPhoto);
     }
 
-    await petService.register(registerPetFormData);
-    navigate("/");
+    try {
+      await petService.register(registerPetFormData);
+      navigate("/");
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+        errorMessageContext.open();
+      }
+    }
   }
 
   return {
@@ -62,6 +72,7 @@ export function useRegisterPetForm() {
     age,
     weight,
     selectedPhoto,
+    errorMessage,
     handleNameChange,
     handleAgeChange,
     handleWeightChange,

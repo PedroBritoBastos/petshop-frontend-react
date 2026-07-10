@@ -1,12 +1,15 @@
 import { getAvailablePets, getClientAdoptedPets, create } from "../services/pet/petService";
+import { useErrorMessageContext } from "./useErrorMessageContext";
 
 export function usePetService() {
+  const errorMessageContext = useErrorMessageContext();
+
   async function getAvailable() {
     try {
       return await getAvailablePets();
     } catch (error) {
       if (error instanceof Error) {
-        console.log(error.message);
+        errorMessageContext.updateErrorMessage(error.message);
       }
     }
   }
@@ -16,7 +19,7 @@ export function usePetService() {
       return await create(registerPetFormData);
     } catch (error) {
       if (error instanceof Error) {
-        console.log(error.message);
+        throw error;
       }
     }
   }
@@ -26,7 +29,7 @@ export function usePetService() {
       return await getClientAdoptedPets(clientId);
     } catch (error) {
       if (error instanceof Error) {
-        console.log(error.message);
+        errorMessageContext.updateErrorMessage(error.message);
       }
     }
   }
