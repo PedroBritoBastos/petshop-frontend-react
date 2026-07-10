@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useAuth } from "./useAuth";
+import { useErrorMessageContext } from "../../../hooks/useErrorMessageContext";
 
 export function useLoginForm() {
   const { loginClient } = useAuth();
+  const errorMessageContext = useErrorMessageContext();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value);
@@ -20,18 +22,23 @@ export function useLoginForm() {
     e.preventDefault();
     e.stopPropagation();
 
-    if (!email || !password) return;
-
-    const loginFormData = { email, password };
-    await loginClient(loginFormData);
+    try {
+      const loginFormData = { email, password };
+      await loginClient(loginFormData);
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+        errorMessageContext.open();
+      }
+    }
   }
 
   return {
     email,
     password,
+    errorMessage,
     handleEmailChange,
     handlePasswordChange,
     handleSubmit,
-    // error,
   };
 }

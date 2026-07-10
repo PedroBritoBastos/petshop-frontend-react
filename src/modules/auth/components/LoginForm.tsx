@@ -1,11 +1,12 @@
 import { useLoginForm } from "../hooks/useLoginForm"
-
+import { ErrorMessage } from "../../../components/ui/ErrorMessage";
 import { Form } from "../../../components/ui/Form"
 
 export function LoginForm() {
   const {
     email,
     password,
+    errorMessage,
     handleEmailChange,
     handlePasswordChange,
     handleSubmit,
@@ -13,6 +14,7 @@ export function LoginForm() {
 
   return (
     <Form.Root onSubmit={handleSubmit}>
+      <ErrorMessage message={errorMessage} />
       <Form.Legend legend="Login" />
       <Form.Link
         title="Não possui conta?"
