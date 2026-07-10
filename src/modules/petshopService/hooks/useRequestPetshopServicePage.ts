@@ -4,25 +4,39 @@ import { useAuthContext } from "../../../hooks/useAuthContext";
 import { usePetService } from "../../../hooks/usePetService";
 import { usePetshopServiceService } from "../../../hooks/usePetshopServiceService";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function useRequestPetshopServicePage() {
   const authContext = useAuthContext();
   const petService = usePetService();
   const petshopServiceService = usePetshopServiceService();
+  const navigate = useNavigate();
 
   const [clientAdoptedPets, setClientAdoptedPets] = useState<Pet[]>([]);
   const [service, setService] = useState("");
   const [selectedPetId, setSelectedPetId] = useState("");
   const [executionDate, setExecutionDate] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!authContext.isLogged) {
+      navigate("/");
+    }
+  }, [authContext.isLogged, navigate]);
 
   /* o effect precisa chamar o service e guardar todos os pets adotados do cliente logado no estado logo assim que carregar a pagina */
   useEffect(() => {
     async function loadClientAdoptedPets() {
-      const pets = await petService.getAdoptedPetsByClientId(authContext.loggedClient?.id as string);
-      setClientAdoptedPets(pets);
+      setLoading(true);
+      try {
+        const pets = await petService.getAdoptedPetsByClientId(authContext.loggedClient?.id as string);
+        setClientAdoptedPets(pets);
+      } finally {
+        setLoading(false);
+      }
     }
     loadClientAdoptedPets();
-  }, []);
+  }, [authContext.loggedClient]);
 
   function handleServiceChange(e: React.ChangeEvent<HTMLSelectElement>) {
     setService(e.target.value);
@@ -55,6 +69,7 @@ export function useRequestPetshopServicePage() {
     service,
     selectedPetId,
     executionDate,
+    loading,
     handleServiceChange,
     handlePetChange,
     handleExecutionDateChange,

@@ -1,18 +1,9 @@
 import { Form } from "../../../components/ui/Form"
 import { NavigateToHomeButton } from "../../../components/ui/NavigateToHomeButton";
-
-import { useNavigate } from "react-router-dom"
 import { useRequestPetshopServicePage } from "../hooks/useRequestPetshopServicePage";
-import { useAuthContext } from "../../../hooks/useAuthContext";
 
 export default function RequestPetshopServicePage() {
-  const navigate = useNavigate();
   const requestPetshopServicePage = useRequestPetshopServicePage();
-  const authContext = useAuthContext();
-
-  if (!authContext.isLogged) {
-    navigate("/")
-  }
 
   return (
     <div className="bg-primary/10 min-h-screen">
@@ -22,60 +13,60 @@ export default function RequestPetshopServicePage() {
 
       <div className="flex justify-center p-6 md:p-10">
         <div className="w-full max-w-2xl bg-white rounded-2xl border border-border shadow-sm">
+          {requestPetshopServicePage.loading ? (
+            <p>Carregando...</p>
+          ) : (
+            <Form.Root onSubmit={requestPetshopServicePage.handleSubmit}>
+              <div className="text-center md:text-start mb-3">
+                <h1 className="text-3xl text-accent-foreground font-bold">Solicitar serviço</h1>
 
-          {/* Formulario */}
-          <Form.Root onSubmit={requestPetshopServicePage.handleSubmit}>
-            <div className="text-center md:text-start mb-3">
-              <h1 className="text-3xl text-accent-foreground font-bold">Solicitar serviço</h1>
+                <p className="text-lg text-card-foreground mt-2">
+                  Escolha o serviço desejado e o pet que será atendido.
+                </p>
+              </div>
 
-              <p className="text-lg text-card-foreground mt-2">
-                Escolha o serviço desejado e o pet que será atendido.
-              </p>
-            </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-medium text-card-foreground"> Tipo de serviço </label>
 
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-card-foreground"> Tipo de serviço </label>
+                <select
+                  value={requestPetshopServicePage.service}
+                  onChange={requestPetshopServicePage.handleServiceChange}
+                  title="services"
+                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
+                >
+                  <option value="">Selecione um serviço</option>
+                  <option value="BANHO">Banho</option>
+                  <option value="TOSA">Tosa</option>
+                  <option value="VETERINARIA">Veterinária</option>
+                  <option value="FARMACIA">Farmácia</option>
+                </select>
+              </div>
 
-              <select
-                value={requestPetshopServicePage.service}
-                onChange={requestPetshopServicePage.handleServiceChange}
-                title="services"
-                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-medium text-card-foreground"> Pet </label>
+
+                <select
+                  value={requestPetshopServicePage.selectedPetId}
+                  onChange={requestPetshopServicePage.handlePetChange}
+                  title="pets"
+                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
+                >
+                  <option value="">Selecione um pet</option>
+                  {requestPetshopServicePage.clientAdoptedPets.map((clientAdoptedPet) => (
+                    <option value={clientAdoptedPet.id} key={clientAdoptedPet.id}>{clientAdoptedPet.name}</option>
+                  ))}
+                </select>
+              </div>
+
+              <Form.Field type="date" id="execution-date" label="Data de execução" value={requestPetshopServicePage.executionDate} onChange={requestPetshopServicePage.handleExecutionDateChange} />
+
+              <Form.Button
+                type="submit"
               >
-                <option value="">Selecione um serviço</option>
-                <option value="BANHO">Banho</option>
-                <option value="TOSA">Tosa</option>
-                <option value="VETERINARIA">Veterinária</option>
-                <option value="FARMACIA">Farmácia</option>
-              </select>
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-card-foreground"> Pet </label>
-
-              <select
-                value={requestPetshopServicePage.selectedPetId}
-                onChange={requestPetshopServicePage.handlePetChange}
-                title="pets"
-                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
-              >
-                <option value="">Selecione um pet</option>
-                {requestPetshopServicePage.clientAdoptedPets.map((clientAdoptedPet) => (
-                  <option value={clientAdoptedPet.id} key={clientAdoptedPet.id}>{clientAdoptedPet.name}</option>
-                ))}
-              </select>
-            </div>
-
-            <Form.Field type="date" id="execution-date" label="Data de execução" value={requestPetshopServicePage.executionDate} onChange={requestPetshopServicePage.handleExecutionDateChange} />
-
-            <Form.Button
-              type="submit"
-            >
-              Confirmar solicitação
-            </Form.Button>
-          </Form.Root>
-          {/* Formulario */}
-
+                Confirmar solicitação
+              </Form.Button>
+            </Form.Root>
+          )}
         </div >
       </div >
     </div >
