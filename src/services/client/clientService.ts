@@ -16,7 +16,7 @@ export async function register(registerFormData: RegisterFormData) {
     const error = await response.json();
 
     if (error.errors) {
-      throw new Error(error.errors.map((e: { msg: string }) => e.msg).join("\n"));
+      throw new Error(error.errors[0].msg);
     }
 
     throw new Error(error.message);

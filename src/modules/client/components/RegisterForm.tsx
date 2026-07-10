@@ -1,5 +1,5 @@
 import { Form } from "../../../components/ui/Form";
-
+import { ErrorMessage } from "../../../components/ui/ErrorMessage";
 import { useRegisterForm } from "../hooks/registerForm/useRegisterForm";
 
 export function RegisterForm() {
@@ -9,6 +9,7 @@ export function RegisterForm() {
     cpf,
     password,
     confirmPassword,
+    errorMessage,
     handleNameChange,
     handleEmailChange,
     handleCpfChange,
@@ -19,6 +20,7 @@ export function RegisterForm() {
 
   return (
     <Form.Root onSubmit={handleSubmit}>
+      <ErrorMessage message={errorMessage} />
       <Form.Legend legend="Cadastrar" />
       <Form.Link title="Já possui conta?" href="/login" linkTitle="Faça login." />
       <Form.Field

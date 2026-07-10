@@ -17,7 +17,7 @@ export function useClientService() {
       navigate("/");
     } catch (error) {
       if (error instanceof Error) {
-        alert(error.message);
+        throw error;
       }
     }
   }

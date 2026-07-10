@@ -1,8 +1,10 @@
 import { useClientService } from "../clientService/useClientService";
 import { useState } from "react";
+import { useErrorMessageContext } from "../../../../hooks/useErrorMessageContext";
 
 export function useRegisterForm() {
   const { registerClient } = useClientService();
+  const errorMessageContext = useErrorMessageContext();
 
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -10,6 +12,7 @@ export function useRegisterForm() {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [cpf, setCpf] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     setName(e.target.value);
@@ -42,7 +45,15 @@ export function useRegisterForm() {
     if (password !== confirmPassword) return;
 
     const registerFormData = { name, email, password, phone, cpf };
-    await registerClient(registerFormData);
+
+    try {
+      await registerClient(registerFormData);
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+        errorMessageContext.open();
+      }
+    }
   }
 
   return {
@@ -52,6 +63,7 @@ export function useRegisterForm() {
     confirmPassword,
     phone,
     cpf,
+    errorMessage,
     handleNameChange,
     handleEmailChange,
     handlePasswordChange,
