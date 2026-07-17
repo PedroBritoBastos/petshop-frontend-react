@@ -53,7 +53,7 @@ export function useRegisterPetForm() {
     registerPetFormData.append("weight", weight);
 
     if (selectedPhoto) {
-      registerPetFormData.append("petPhoto", selectedPhoto);
+      registerPetFormData.append("photo", selectedPhoto);
     }
 
     try {
