@@ -4,8 +4,6 @@ type Props = {
   imageUrl: string;
 }
 
-const API = import.meta.env.VITE_API_URL;
-
 export function AvailableAdoptionCard({
   name = 'Pet',
   age = 0,
@@ -17,10 +15,9 @@ export function AvailableAdoptionCard({
     >
       {/* Imagem do pet */}
       <div className="h-[300px] border-b-1 border-accent">
-        <img src={`${API}/${imageUrl.replace("undefined/", "")}`} alt="name" className="w-full h-full" />
+        <img src={imageUrl} alt="name" className="w-full h-full" />
       </div>
       {/* Imagem do pet */}
-
 
       <div className="p-6">
         <div className="my-2">
