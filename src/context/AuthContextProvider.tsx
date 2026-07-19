@@ -8,6 +8,7 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
 
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const [loggedClient, setLoggedClient] = useState<Client | null>(null);
+  const [loading, setLoading] = useState(true);
 
   /* 
   * Verifica se existe cliente logado a cada re-renderização.
@@ -15,12 +16,18 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
   */
   useEffect(() => {
     async function verifyIfClientIsLogged() {
-      const client = await auth.isClientLogged();
-      if (client !== undefined && client !== null) {
-        setLoggedClient(client);
-        setIsLogged(true);
+      try {
+        const client = await auth.isClientLogged();
+
+        if (client) {
+          setLoggedClient(client);
+          setIsLogged(true);
+        }
+      } finally {
+        setLoading(false);
       }
     }
+
     verifyIfClientIsLogged();
   }, []);
 
@@ -40,6 +47,7 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
     <AuthContext.Provider value={{
       isLogged,
       loggedClient,
+      loading,
       login,
       logout
     }}>

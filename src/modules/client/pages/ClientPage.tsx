@@ -10,7 +10,6 @@ import clientPageHeroImage from "../../../assets/client-page-hero-image.jpg";
 
 export default function ClientPage() {
   const clientPage = useClientPage();
-  console.log(clientPage.availablePets)
 
   return (
     <div className="w-full">
@@ -175,3 +174,4 @@ export default function ClientPage() {
     </div >
   )
 }
+

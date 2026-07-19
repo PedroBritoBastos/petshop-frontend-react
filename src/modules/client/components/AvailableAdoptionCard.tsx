@@ -36,7 +36,9 @@ export function AvailableAdoptionCard({
           </button>
         </div>
       </div>
-    </div >
-
+    </div>
   )
 }
+
+
+
