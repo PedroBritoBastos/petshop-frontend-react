@@ -21,7 +21,7 @@ export default function AdoptPetPage() {
 
   return (
     <div>
-      AdoptPet
+      {authContext.loggedClient?.email}
     </div>
   )
 }

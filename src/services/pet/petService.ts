@@ -34,3 +34,14 @@ export async function create(registerPetFormData: FormData) {
     throw new Error(error.message);
   }
 }
+
+export async function getPetById(id: string) {
+  const response = await fetch(`${API}/pets/${id}`);
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+
+  return (await response.json()).result;
+}
