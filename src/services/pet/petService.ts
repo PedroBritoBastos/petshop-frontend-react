@@ -35,8 +35,8 @@ export async function create(registerPetFormData: FormData) {
   }
 }
 
-export async function getPetById(id: string) {
-  const response = await fetch(`${API}/pets/${id}`);
+export async function getById(id: string) {
+  const response = await fetch(`${API}/pets/${id}`, { credentials: "include" });
 
   if (!response.ok) {
     const error = await response.json();

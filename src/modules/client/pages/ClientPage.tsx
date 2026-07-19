@@ -56,6 +56,7 @@ export default function ClientPage() {
           {clientPage.availablePets.map((availablePet: Pet) => (
             <AvailableAdoptionCard
               key={availablePet.id}
+              id={availablePet.id}
               name={availablePet.name}
               age={availablePet.age}
               imageUrl={availablePet.imageUrl}

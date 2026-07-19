@@ -16,7 +16,7 @@ function App() {
       <Route path='/login' element={<LoginPage />} />
       <Route path='/register' element={<RegisterPage />} />
       <Route path='/pet/register' element={<RegisterPetPage />} />
-      <Route path='/pet/adopt' element={<AdoptPetPage />} />
+      <Route path='/pet/adopt/:petId' element={<AdoptPetPage />} />
       <Route path='/petshop-services/request' element={<RequestPetshopServicePage />} />
       <Route path='/my-adoptions' element={<MyAdoptionsPage />} />
       <Route path='/admin' element={<AdminLayout />} />
