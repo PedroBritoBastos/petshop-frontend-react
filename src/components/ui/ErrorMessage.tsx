@@ -9,7 +9,7 @@ export function ErrorMessage({ message }: Props) {
 
   return (
     <>
-      {errorMessageContext.isOpen && (
+      {(errorMessageContext.isOpen && message) && (
         <>
           {/* Backdrop */}
           < div
