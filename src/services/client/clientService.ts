@@ -24,3 +24,14 @@ export async function register(registerFormData: RegisterFormData) {
 
   return await response.json();
 }
+
+export async function getById(id: string) {
+  const response = await fetch(`${API}/clients/${id}`, { credentials: "include" });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+
+  return (await response.json()).result;
+}

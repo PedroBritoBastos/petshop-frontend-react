@@ -49,5 +49,5 @@ export async function getLoggedClient() {
     throw new Error(error.message);
   }
 
-  return await response.json();
+  return (await response.json()).result;
 }

@@ -5,7 +5,6 @@ import type { Client } from "../modules/client/types/Client";
 
 export function AuthContextProvider({ children }: { children: React.ReactNode }) {
   const auth = useAuth();
-
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const [loggedClient, setLoggedClient] = useState<Client | null>(null);
   const [loading, setLoading] = useState(true);
@@ -17,6 +16,8 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
   useEffect(() => {
     async function verifyIfClientIsLogged() {
       try {
+        // verifica se o cliente está logado
+        // se estiver logado, atualiza os estados
         const client = await auth.isClientLogged();
 
         if (client) {
