@@ -4,4 +4,4 @@ type LoadingContextProps = {
   loading: boolean;
 };
 
-export const AuthContext = createContext<LoadingContextProps>({} as LoadingContextProps);
+export const LoadingContext = createContext<LoadingContextProps>({} as LoadingContextProps);
