@@ -67,6 +67,7 @@ export function useRequestPetshopServicePage() {
       };
 
       await petshopServiceService.requestPetshopService(requestPetshopServiceFormData);
+      navigate("/my-adoptions");
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
