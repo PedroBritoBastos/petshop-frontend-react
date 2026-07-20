@@ -2,6 +2,8 @@ import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { usePetService } from "../../../hooks/usePetService";
+import { useErrorMessageContext } from "../../../hooks/useErrorMessageContext";
+import { ErrorMessage } from "../../../components/ui/ErrorMessage";
 
 import type { Pet } from "../../../types/Pet";
 
@@ -10,12 +12,14 @@ import { Info } from "../components/Info";
 
 export default function AdoptPetPage() {
   const authContext = useAuthContext();
+  const errorMessageContext = useErrorMessageContext();
   const navigate = useNavigate();
   const petService = usePetService();
   const { petId } = useParams();
 
   const [pet, setPet] = useState<Pet | null>(null);
   const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState<string | null>(null);
 
   // verifica se o cliente está logado
   // redireciona para login caso não esteja
@@ -49,8 +53,35 @@ export default function AdoptPetPage() {
     return null;
   }
 
+
+  // conclui a adoção e redireciona para a home caso tenha sucesso
+  async function handleAdopt(event: React.MouseEvent<HTMLButtonElement>) {
+    try {
+      event.preventDefault();
+      event.stopPropagation();
+      setLoading(true);
+
+      const message = await petService.adoptPetById(pet?.id as string);
+      setMessage(message);
+      errorMessageContext.open();
+      navigate("/my-adoptions");
+    }
+    catch (error) {
+      if (error instanceof Error) {
+        setMessage(error.message);
+        errorMessageContext.open();
+      }
+    }
+    finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="bg-primary/10 h-screen flex flex-col">
+
+      <ErrorMessage message={message} />
+
       {/* Navbar */}
       <nav className="w-full bg-white border-b border-border p-4 shrink-0">
         <NavigateToHomeButton />
@@ -113,7 +144,7 @@ export default function AdoptPetPage() {
 
               {/* botão para prosseguir com a adoção */}
               <div className="flex items-center justify-end">
-                <button className="bg-ring hover:bg-secondary text-lg text-primary-foreground font-semibold rounded-xl px-8 py-4 block w-fit cursor-pointer mt-4">
+                <button onClick={handleAdopt} disabled={loading} className="bg-ring hover:bg-secondary text-lg text-primary-foreground font-semibold rounded-xl px-8 py-4 block w-fit cursor-pointer mt-4">
                   Finalizar adoção
                 </button>
               </div>

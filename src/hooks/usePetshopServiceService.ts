@@ -17,7 +17,7 @@ export function usePetshopServiceService() {
       await request(requestPetshopServiceFormData);
     } catch (error) {
       if (error instanceof Error) {
-        console.log(error.message);
+        throw error;
       }
     }
   }

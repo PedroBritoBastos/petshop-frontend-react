@@ -1,5 +1,6 @@
 import { Form } from "../../../components/ui/Form"
 import { NavigateToHomeButton } from "../../../components/ui/NavigateToHomeButton";
+import { ErrorMessage } from "../../../components/ui/ErrorMessage";
 import { useRequestPetshopServicePage } from "../hooks/useRequestPetshopServicePage";
 
 export default function RequestPetshopServicePage() {
@@ -7,7 +8,12 @@ export default function RequestPetshopServicePage() {
 
   return (
     <div className="bg-primary/10 min-h-screen">
-      <nav className="w-full bg-white border-b border-border p-4">
+      <ErrorMessage message={requestPetshopServicePage.error} />
+
+      <nav className="w-full bg-white border-b border-border p-4 px-8 md:px-20 xl:px-40 flex items-center justify-between">
+        <div className="rounded-full bg-primary/10 text-foreground w-fit py-2 px-4">
+          {requestPetshopServicePage.loggedClientEmail}
+        </div>
         <NavigateToHomeButton />
       </nav>
 

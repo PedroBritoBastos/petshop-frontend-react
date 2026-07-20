@@ -45,3 +45,17 @@ export async function getById(id: string) {
 
   return (await response.json()).result;
 }
+
+export async function adopt(id: string) {
+  const response = await fetch(`${API}/pets/adoption/${id}`, {
+    method: "PUT",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+
+  return (await response.json()).message;
+}
