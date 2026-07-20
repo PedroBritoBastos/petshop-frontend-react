@@ -106,8 +106,8 @@ export default function AdoptPetPage() {
               <Info
                 info="Telefone"
                 value={
-                  authContext.loggedClient?.phone ??
-                  "Não informado."
+                  authContext.loggedClient?.phone ? authContext.loggedClient.phone :
+                    "Não informado."
                 }
               />
 
