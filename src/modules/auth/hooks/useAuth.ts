@@ -1,7 +1,7 @@
 import type { LoginFormData } from "../types/LoginFormData";
 import type { Client } from "../../client/types/Client";
 
-import { login, logout, getLoggedClient } from "../../../services/auth/authService";
+import { login, logout, getLoggedClient, verifyIfLoggedClientIsAdmin } from "../../../services/auth/authService";
 
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
@@ -43,10 +43,20 @@ export function useAuth() {
       return await getLoggedClient();
     } catch (error) {
       if (error instanceof Error) {
-        //  console.log(error.message);
+        console.log(error.message);
       }
     }
   }
 
-  return { loginClient, logoutClient, isClientLogged };
+  async function isAdmin() {
+    try {
+      return await verifyIfLoggedClientIsAdmin();
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+    }
+  }
+
+  return { loginClient, logoutClient, isClientLogged, isAdmin };
 }

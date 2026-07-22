@@ -5,9 +5,23 @@ import { ClientsView } from "../components/ClientsView/ClientsView";
 import { ServicesView } from "../components/ServicesView/ServicesView";
 
 import { useViewModeContext } from "../hooks/useViewModeContext"
+import { useAdminPage } from "../hooks/useAdminPage";
+import { useAuthContext } from "../../../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminPage() {
   const { activeOption } = useViewModeContext();
+  const adminPage = useAdminPage();
+  const authContext = useAuthContext();
+  const navigate = useNavigate();
+
+  if (!authContext.isLogged) {
+    navigate("/");
+  }
+
+  if (authContext.loading) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col md:flex-row">

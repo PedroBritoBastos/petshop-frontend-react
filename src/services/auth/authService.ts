@@ -51,3 +51,14 @@ export async function getLoggedClient() {
 
   return (await response.json()).result;
 }
+
+export async function verifyIfLoggedClientIsAdmin() {
+  const response = await fetch(`${API}/auth/admin/verify`, { credentials: "include" });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+
+  return (await response.json()).result;
+}

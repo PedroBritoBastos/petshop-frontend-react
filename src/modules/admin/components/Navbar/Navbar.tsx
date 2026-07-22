@@ -1,11 +1,26 @@
 import { NavbarOption } from "./NavbarOption"
 import { useViewModeContext } from "../../hooks/useViewModeContext";
+import { useAuth } from "../../../auth/hooks/useAuth";
 
 export function Navbar() {
   const { activeOption, changeActiveOption } = useViewModeContext();
+  const auth = useAuth();
 
   function handleNavbarOptionClick(optionName: string): void {
     changeActiveOption(optionName);
+  }
+
+  async function handleLogout(event: React.MouseEvent<HTMLButtonElement>) {
+    try {
+      event.preventDefault();
+      event.stopPropagation();
+      await auth.logoutClient();
+    }
+    catch (error) {
+      if (error instanceof Error) {
+        console.log(error);
+      }
+    }
   }
 
   return (
@@ -103,6 +118,7 @@ export function Navbar() {
 
         {/* Botao de logout */}
         <button
+          onClick={handleLogout}
           className="bg-primary/10 hover:bg-primary/50 text-foreground mt-10 cursor-pointer text-xs sm:text-md md:text-lg font-semibold flex items-center gap-2 px-4 py-2 rounded-xl whitespace-nowrap transition-colors md:w-full"
         >
           <svg
