@@ -1,6 +1,23 @@
 import { PetsTableRow } from "./PetsTableRow"
+import { usePetService } from "../../../../hooks/usePetService"
+import { useState, useEffect } from "react"
+import type { Pet } from "../../../../types/Pet";
 
 export function PetsTable() {
+  const petService = usePetService();
+
+  const [pets, setPets] = useState<Pet[]>([]);
+
+  // busca todos os pets
+  useEffect(() => {
+    async function load() {
+      const petsResponse = await petService.getAllPets();
+      setPets(petsResponse);
+    }
+
+    load();
+  }, [])
+
   return (
     <div
       className="bg-white border border-border shadow-sm rounded-2xl overflow-hidden flex flex-col h-full"
@@ -17,8 +34,6 @@ export function PetsTable() {
 
               <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Dono</th>
 
-              <th className="text-left p-4 text-sm font-semibold text-muted-foreground">CPF</th>
-
               <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Peso</th>
 
               <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Idade</th>
@@ -26,7 +41,12 @@ export function PetsTable() {
           </thead>
 
           <tbody>
-            <PetsTableRow />
+            {pets.map((pet) => (
+              <PetsTableRow
+                key={pet.id}
+                pet={pet}
+              />
+            ))}
           </tbody>
         </table>
       </div>

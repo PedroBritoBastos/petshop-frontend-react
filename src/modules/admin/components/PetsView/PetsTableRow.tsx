@@ -1,4 +1,10 @@
-export function PetsTableRow() {
+import type { Pet } from "../../../../types/Pet"
+
+interface Props {
+  pet: Pet;
+}
+
+export function PetsTableRow({ pet }: Props) {
   return (
     <>
       <tr className="border-b border-border hover:bg-primary/5 transition-colors">
@@ -7,26 +13,22 @@ export function PetsTableRow() {
             <div
               className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-semibold"
             >
-              {'P'}
+              {pet.name[0].toUpperCase()}
             </div>
 
             <p className="font-semibold text-foreground">
-              {'Pet'}
+              {pet.name}
             </p>
           </div>
         </td>
 
         <td className="p-4 text-muted-foreground">
-          {'Client'}
+          {pet.adoptionClientId}
         </td>
 
-        <td className="p-4 text-muted-foreground">
-          {'Cpf'}
-        </td>
+        <td className="p-4 text-muted-foreground">{pet.weight} kg</td>
 
-        <td className="p-4 text-muted-foreground">{"Weight"} kg</td>
-
-        <td className="p-4 text-muted-foreground">{'Age'} anos</td>
+        <td className="p-4 text-muted-foreground">{pet.age} anos</td>
       </tr>
     </>
   )
