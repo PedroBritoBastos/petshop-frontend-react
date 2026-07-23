@@ -1,4 +1,34 @@
+import type { PetshopService } from "../../../petshopService/types/PetshopService"
+import { ServicesTableRow } from "./ServicesTableRow";
+
+import { usePetshopServiceService } from "../../../../hooks/usePetshopServiceService"
+import { useState, useEffect, useMemo } from "react"
+
 export function ServicesTable() {
+  const petshopServiceService = usePetshopServiceService();
+
+  const [petshopServices, setPetshopServices] = useState<PetshopService[]>([]);
+
+  // busca todos os pets
+  useEffect(() => {
+    async function load() {
+      const petshopServicesResponse = await petshopServiceService.getClientPetshopServices();
+      setPetshopServices(petshopServicesResponse);
+    }
+
+    load();
+  }, [])
+
+  // memoizando as linhas da tabela para evitar re-renderização se a prop petshopServices não mudar
+  const renderedRows = useMemo(() => {
+    return petshopServices.map((service) => (
+      <ServicesTableRow
+        key={service.id}
+        service={service}
+      />
+    ));
+  }, [petshopServices]);
+
   return (
     <div
       className="bg-white border border-border shadow-sm rounded-2xl overflow-hidden flex flex-col h-full"
@@ -24,31 +54,7 @@ export function ServicesTable() {
           </thead>
 
           <tbody>
-            <tr className="border-b border-border hover:bg-primary/5 transition-colors">
-              <td className="p-4">
-                <span
-                  className="bg-primary/10 text-foreground py-1 px-3 rounded-full text-xs font-semibold"
-                >
-                  {'type'}
-                </span>
-              </td>
-
-              <td className="p-4 text-muted-foreground">
-                {'clientName'}
-              </td>
-
-              <td className="p-4 text-muted-foreground">
-                {'petName'}
-              </td>
-
-              <td className="p-4 text-muted-foreground">
-                {'date'}
-              </td>
-
-              <td className="p-4 text-muted-foreground">
-                {'executionDate'}
-              </td>
-            </tr>
+            {renderedRows}
           </tbody>
         </table>
       </div>

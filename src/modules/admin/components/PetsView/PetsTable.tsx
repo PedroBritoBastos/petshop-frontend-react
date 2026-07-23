@@ -1,6 +1,6 @@
 import { PetsTableRow } from "./PetsTableRow"
 import { usePetService } from "../../../../hooks/usePetService"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import type { Pet } from "../../../../types/Pet";
 
 export function PetsTable() {
@@ -17,6 +17,16 @@ export function PetsTable() {
 
     load();
   }, [])
+
+  // memoizando as linhas da tabela para evitar re-renderização se a prop pets não mudar
+  const renderedRows = useMemo(() => {
+    return pets.map((pet) => (
+      <PetsTableRow
+        key={pet.id}
+        pet={pet}
+      />
+    ));
+  }, [pets]);
 
   return (
     <div
@@ -41,12 +51,7 @@ export function PetsTable() {
           </thead>
 
           <tbody>
-            {pets.map((pet) => (
-              <PetsTableRow
-                key={pet.id}
-                pet={pet}
-              />
-            ))}
+            {renderedRows}
           </tbody>
         </table>
       </div>

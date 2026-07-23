@@ -2,7 +2,7 @@ import { ClientsTableRow } from "./ClientsTableRow"
 
 import type { Client } from "../../../client/types/Client"
 import { useClientService } from "../../../client/hooks/clientService/useClientService"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 
 export function ClientsTable() {
   const clientService = useClientService();
@@ -18,6 +18,16 @@ export function ClientsTable() {
 
     load();
   }, [])
+
+  // memoizando as linhas da tabela para evitar re-renderização se a prop clients não alterar
+  const renderedRows = useMemo(() => {
+    return clients.map((client) => (
+      <ClientsTableRow
+        key={client.id}
+        client={client}
+      />
+    ));
+  }, [clients]);
 
   return (
     <div className="bg-white border border-border shadow-sm rounded-2xl overflow-hidden flex flex-col h-full">
@@ -41,12 +51,7 @@ export function ClientsTable() {
           </thead>
 
           <tbody>
-            {clients.map((client) => (
-              <ClientsTableRow
-                key={client.id}
-                client={client}
-              />
-            ))}
+            {renderedRows}
           </tbody>
         </table>
       </div>
