@@ -2,13 +2,21 @@ import { DashboardCard } from "./DashboardCard"
 import { AdoptionsTable } from "./AdoptionsTable"
 import { SchedulingTable } from "./SchedulingTable"
 
-export function Dashboard() {
+interface Props {
+  data: {
+    numberOfClients: number;
+    numberOfPets: number;
+    numberOfAdoptedPets: number;
+  }
+}
+
+export function Dashboard({ data }: Props) {
   return (
     <div className="w-full flex flex-col p-5 md:p-10 bg-primary/10 gap-5">
 
       {/* dashboard */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 w-full gap-5">
-        <DashboardCard value={0} title={'Clientes'}>
+        <DashboardCard value={data.numberOfClients} title={'Clientes'}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -25,7 +33,7 @@ export function Dashboard() {
             <circle cx="12" cy="7" r="4" />
           </svg>
         </DashboardCard>
-        <DashboardCard value={0} title='Pets'>
+        <DashboardCard value={data.numberOfPets} title='Pets'>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -46,7 +54,7 @@ export function Dashboard() {
             />
           </svg>
         </DashboardCard>
-        <DashboardCard value={0} title='Pets disponíveis'>
+        <DashboardCard value={(data.numberOfPets - data.numberOfAdoptedPets)} title='Pets disponíveis'>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -70,7 +78,7 @@ export function Dashboard() {
             />
           </svg>
         </DashboardCard>
-        <DashboardCard value={0} title='Pets adotados'>
+        <DashboardCard value={data.numberOfAdoptedPets} title='Pets adotados'>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

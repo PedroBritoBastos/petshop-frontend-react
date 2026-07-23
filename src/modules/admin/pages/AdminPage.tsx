@@ -5,20 +5,16 @@ import { ClientsView } from "../components/ClientsView/ClientsView";
 import { ServicesView } from "../components/ServicesView/ServicesView";
 
 import { useViewModeContext } from "../hooks/useViewModeContext"
-import { useAdminPage } from "../hooks/useAdminPage";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import { useNavigate } from "react-router-dom";
+import { useAdminPage } from "../hooks/useAdminPage";
+
 
 export default function AdminPage() {
   const { activeOption } = useViewModeContext();
-  const adminPage = useAdminPage();
   const authContext = useAuthContext();
-  const navigate = useNavigate();
+  const adminPage = useAdminPage();
 
-  if (!authContext.isLogged) {
-    navigate("/");
-  }
-
+  // impede o conteudo renderizar enquanto os dados carregam
   if (authContext.loading) {
     return null;
   }
@@ -29,7 +25,11 @@ export default function AdminPage() {
 
       {/* Modo painel */}
       {activeOption === 'Painel' && (
-        <Dashboard />
+        <Dashboard data={{
+          numberOfClients: adminPage.clients.length,
+          numberOfPets: adminPage.pets.length,
+          numberOfAdoptedPets: adminPage.adoptedPets.length
+        }} />
       )}
       {/* Modo painel */}
 

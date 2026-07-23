@@ -1,7 +1,7 @@
 import type { RegisterFormData } from "../../types/RegisterFormData";
 import type { Client } from "../../types/Client";
 
-import { register, getById } from "../../../../services/client/clientService";
+import { register, getById, getClients } from "../../../../services/client/clientService";
 
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
@@ -32,5 +32,15 @@ export function useClientService() {
     }
   }
 
-  return { registerClient, getClientById };
+  async function getAllClients() {
+    try {
+      return await getClients();
+    } catch (error) {
+      if (error instanceof Error) {
+        return;
+      }
+    }
+  }
+
+  return { registerClient, getClientById, getAllClients };
 }
