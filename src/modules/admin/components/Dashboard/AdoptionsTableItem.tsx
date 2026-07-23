@@ -1,9 +1,9 @@
 interface Props {
   petName: string;
-  clientName: string;
+  adoptionDate: string;
 }
 
-export function AdoptionsTableItem({ petName, clientName }: Props) {
+export function AdoptionsTableItem({ petName, adoptionDate }: Props) {
   return (
     <div className="bg-primary/10 rounded-xl p-2 flex items-center gap-3">
       <div className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-primary">
@@ -29,7 +29,7 @@ export function AdoptionsTableItem({ petName, clientName }: Props) {
       </div>
       <div>
         <p className="text-foreground text-lg font-bold">{petName}</p>
-        <p className="text-primary text-md">Adotado por {clientName}</p>
+        <p className="text-primary text-md">Adotado em {adoptionDate}</p>
       </div>
     </div>
   )

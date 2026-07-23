@@ -1,16 +1,20 @@
 import { DashboardCard } from "./DashboardCard"
 import { AdoptionsTable } from "./AdoptionsTable"
 import { SchedulingTable } from "./SchedulingTable"
+import type { Pet } from "../../../../types/Pet"
+import type { PetshopService } from "../../../petshopService/types/PetshopService"
 
 interface Props {
   data: {
     numberOfClients: number;
     numberOfPets: number;
     numberOfAdoptedPets: number;
-  }
+  };
+  adoptedPets: Pet[];
+  petshopServices: PetshopService[];
 }
 
-export function Dashboard({ data }: Props) {
+export function Dashboard({ data, adoptedPets, petshopServices }: Props) {
   return (
     <div className="w-full flex flex-col p-5 md:p-10 bg-primary/10 gap-5">
 
@@ -101,8 +105,12 @@ export function Dashboard({ data }: Props) {
 
       {/* Tabelas */}
       <div className="flex flex-col md:flex-row gap-5 flex-1">
-        <AdoptionsTable />
-        <SchedulingTable />
+        <AdoptionsTable
+          adoptedPets={adoptedPets}
+        />
+        <SchedulingTable
+          petshopServices={petshopServices}
+        />
       </div>
       {/* Tabelas */}
     </div>

@@ -25,11 +25,15 @@ export default function AdminPage() {
 
       {/* Modo painel */}
       {activeOption === 'Painel' && (
-        <Dashboard data={{
-          numberOfClients: adminPage.clients.length,
-          numberOfPets: adminPage.pets.length,
-          numberOfAdoptedPets: adminPage.adoptedPets.length
-        }} />
+        <Dashboard
+          data={{
+            numberOfClients: adminPage.clients.length,
+            numberOfPets: adminPage.pets.length,
+            numberOfAdoptedPets: adminPage.adoptedPets.length
+          }}
+          adoptedPets={adminPage.adoptedPets}
+          petshopServices={adminPage.petshopServices}
+        />
       )}
       {/* Modo painel */}
 
