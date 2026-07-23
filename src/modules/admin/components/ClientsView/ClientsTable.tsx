@@ -1,6 +1,24 @@
 import { ClientsTableRow } from "./ClientsTableRow"
 
+import type { Client } from "../../../client/types/Client"
+import { useClientService } from "../../../client/hooks/clientService/useClientService"
+import { useState, useEffect } from "react"
+
 export function ClientsTable() {
+  const clientService = useClientService();
+
+  const [clients, setClients] = useState<Client[]>([]);
+
+  // busca os clientes
+  useEffect(() => {
+    async function load() {
+      const clientsResponse = await clientService.getAllClients();
+      setClients(clientsResponse);
+    }
+
+    load();
+  }, [])
+
   return (
     <div className="bg-white border border-border shadow-sm rounded-2xl overflow-hidden flex flex-col h-full">
       <div className="p-5 border-b border-border flex items-center justify-between">
@@ -19,12 +37,16 @@ export function ClientsTable() {
 
               <th className="text-left p-4 text-sm font-semibold text-muted-foreground">CPF</th>
 
-              <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Pets</th>
             </tr>
           </thead>
 
           <tbody>
-            <ClientsTableRow />
+            {clients.map((client) => (
+              <ClientsTableRow
+                key={client.id}
+                client={client}
+              />
+            ))}
           </tbody>
         </table>
       </div>
