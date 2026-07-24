@@ -7,12 +7,19 @@ import { ServicesView } from "../components/ServicesView/ServicesView";
 import { useViewModeContext } from "../hooks/useViewModeContext"
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useAdminPage } from "../hooks/useAdminPage";
+import { useNavigate } from "react-router-dom";
 
 
 export default function AdminPage() {
   const { activeOption } = useViewModeContext();
   const authContext = useAuthContext();
   const adminPage = useAdminPage();
+  const navigate = useNavigate();
+
+  // redireciona para login se não estiver logado
+  if (!authContext.isLogged) {
+    navigate("/login");
+  }
 
   // impede o conteudo renderizar enquanto os dados carregam
   if (authContext.loading) {

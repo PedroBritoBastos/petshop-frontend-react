@@ -16,9 +16,18 @@ export function useAuth() {
   */
   async function loginClient(loginFormData: LoginFormData) {
     try {
+      // atualizando estado global com o cliente logado
       const client: Client = await login(loginFormData);
       authContext.login(client);
-      navigate("/");
+
+      // redireciona para a pagina de admin se o usuário for um admin
+      const isAdmin = await verifyIfLoggedClientIsAdmin();
+
+      if (isAdmin) {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       if (error instanceof Error) {
         throw error;
@@ -43,7 +52,7 @@ export function useAuth() {
       return await getLoggedClient();
     } catch (error) {
       if (error instanceof Error) {
-        console.log(error.message);
+        // console.log(error.message);
       }
     }
   }
@@ -53,7 +62,7 @@ export function useAuth() {
       return await verifyIfLoggedClientIsAdmin();
     } catch (error) {
       if (error instanceof Error) {
-        console.log(error.message);
+        // console.log(error.message);
       }
     }
   }

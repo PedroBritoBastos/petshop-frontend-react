@@ -11,6 +11,10 @@ import clientPageHeroImage from "../../../assets/client-page-hero-image.jpg";
 export default function ClientPage() {
   const clientPage = useClientPage();
 
+  if (clientPage.loading) {
+    return null;
+  }
+
   return (
     <div className="w-full">
       <Navbar />
