@@ -7,6 +7,11 @@ export function Navbar() {
   const navigate = useNavigate();
   const navbar = useNavbar();
 
+  // impede a renderizacao do conteudo enquando os dados carregam
+  if (navbar.loading) {
+    return null;
+  }
+
   return (
     <nav className="w-full border-b border-accent p-4 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
       {/* Logo + Login/Usuário */}
@@ -82,17 +87,28 @@ export function Navbar() {
             Sair
           </button>
 
-          <button className="hover:text-foreground/60 cursor-pointer" onClick={() => navigate("/my-adoptions")}>
-            Minhas adoções
-          </button>
+          {/* se for admin: apresenta apenas a opcao de ir para painel */}
+          {/* se for cliente: apresenta as opcoes de cliente */}
+          {navbar.isAdmin ? (
+            <button className="hover:text-foreground/60 cursor-pointer" onClick={() => navigate("/admin")}>
+              Painel administrativo
+            </button>
+          ) : (
+            <>
+              <button disabled={navbar.isAdmin} className="hover:text-foreground/60 cursor-pointer" onClick={() => navigate("/my-adoptions")}>
+                Minhas adoções
+              </button>
 
-          <button className="hover:text-foreground/60 cursor-pointer" onClick={() => navigate("/pet/register")}>
-            Cadastrar um pet
-          </button>
+              <button disabled={navbar.isAdmin} className="hover:text-foreground/60 cursor-pointer" onClick={() => navigate("/pet/register")}>
+                Cadastrar um pet
+              </button>
 
-          <button className="hover:text-foreground/60 cursor-pointer" onClick={() => navigate("/petshop-services/request")}>
-            Solicitar um serviço
-          </button>
+              <button disabled={navbar.isAdmin} className="hover:text-foreground/60 cursor-pointer" onClick={() => navigate("/petshop-services/request")}>
+                Solicitar um serviço
+              </button>
+            </>
+          )
+          }
         </div>
       )}
     </nav>
