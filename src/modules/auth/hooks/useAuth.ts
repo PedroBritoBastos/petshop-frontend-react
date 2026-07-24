@@ -22,7 +22,6 @@ export function useAuth() {
 
       // redireciona para a pagina de admin se o usuário for um admin
       const isAdmin = await verifyIfLoggedClientIsAdmin();
-
       if (isAdmin) {
         navigate("/admin");
       } else {

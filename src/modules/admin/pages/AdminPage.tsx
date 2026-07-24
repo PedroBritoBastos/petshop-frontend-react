@@ -8,6 +8,7 @@ import { useViewModeContext } from "../hooks/useViewModeContext"
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useAdminPage } from "../hooks/useAdminPage";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 
 export default function AdminPage() {
@@ -17,9 +18,12 @@ export default function AdminPage() {
   const navigate = useNavigate();
 
   // redireciona para login se não estiver logado
-  if (!authContext.isLogged) {
-    navigate("/login");
-  }
+  useEffect(() => {
+    if (!authContext.isLogged) {
+      navigate("/login");
+    }
+  }, [])
+
 
   // impede o conteudo renderizar enquanto os dados carregam
   if (authContext.loading) {
